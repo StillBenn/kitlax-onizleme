@@ -291,7 +291,7 @@ section:not(.film) { position: relative; z-index: 1; padding: clamp(4.5rem, 3rem
     .quality { grid-template-rows: auto auto auto auto; row-gap: 1.1rem; }
     .quality__main, .certs { grid-row: 1 / -1; grid-template-rows: subgrid; row-gap: 1.1rem; }   /* one gap for both: a subgrid's own gap shifts its row lines */
     .quality__list { grid-row: 3 / span 2; margin-top: 0; }
-    .certs .label { grid-row: 1; margin-bottom: 0; }
+    .certs .label { grid-row: 2; align-self: end; margin-bottom: 0.15rem; }   /* sits on the cards, level with the title's foot — in row 1 it floated over an empty row */
     .certs .cert:nth-of-type(1) { grid-row: 3; }
     .certs .cert:nth-of-type(2) { grid-row: 4; }
   }
