@@ -284,6 +284,18 @@ section:not(.film) { position: relative; z-index: 1; padding: clamp(4.5rem, 3rem
 .cert__by { margin-top: 0.35rem; font: 600 0.72rem/1.35 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
 .cert__text > p:not(.cert__by) { margin-top: 0.55rem; font-size: 0.93rem; line-height: 1.55; color: var(--ink-soft); }
 @media (max-width: 1100px) { .quality { grid-template-columns: 1fr; } .certs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .certs .label { grid-column: 1 / -1; } }
+/* side by side, the two columns share their rows (subgrid): the labels on one line, the title on the
+   next, and the first document card starts on the very line the list does — not half a title higher */
+@media (min-width: 1101px) {
+  @supports (grid-template-rows: subgrid) {
+    .quality { grid-template-rows: auto auto auto auto; row-gap: 1.1rem; }
+    .quality__main, .certs { grid-row: 1 / -1; grid-template-rows: subgrid; row-gap: 1.1rem; }   /* one gap for both: a subgrid's own gap shifts its row lines */
+    .quality__list { grid-row: 3 / span 2; margin-top: 0; }
+    .certs .label { grid-row: 1; margin-bottom: 0; }
+    .certs .cert:nth-of-type(1) { grid-row: 3; }
+    .certs .cert:nth-of-type(2) { grid-row: 4; }
+  }
+}
 @media (max-width: 720px) { .quality__list, .certs { grid-template-columns: 1fr; } }
 @media (max-width: 960px) { .maker__top { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .besler { grid-template-columns: 1fr; justify-items: start; } .besler__logo { width: 7rem; } }
