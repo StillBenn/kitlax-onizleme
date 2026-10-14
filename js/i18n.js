@@ -204,7 +204,7 @@
     "Beşler Makarna 2004'ten beri bu çatının altında. Kıtlax onun makarna cipsi: Beşler'in irmiği ve titizliği, çıtır bir atıştırmalıkta.": "Beşler Makarna has been part of it since 2004. Kıtlax is its macaroni crisp: Beşler's semolina and care, in a crunchy snack.",
     "Üç dilli ambalaj": "Trilingual packaging",
     "Türkçe, İngilizce ve Arapça: ihracata hazır": "Turkish, English and Arabic: ready for export",
-    "Kıtlax'ın koalası, elinde seçtiğiniz aromanın paketiyle": "The Kıtlax koala holding the bag of the flavour you pick",
+    "Kıtlax'ın koalası, bileğine bağlı iple seçtiğiniz aromanın paketini taşıyor": "The Kıtlax koala carrying the bag of the flavour you pick, on a cord tied round its wrist",
     "Her aromanın paketinde, o aromanın renginde tulumuyla. Bir aroma seçin: koala onun paketini tutsun.": "On each flavour's bag, in dungarees of that flavour's colour. Pick a flavour and the koala holds up its bag.",
     "Koalanın aroması": "The koala's flavour",
     "Beşler": "Beşler",
