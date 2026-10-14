@@ -1,31 +1,19 @@
 /* ==========================================================================
    The home page below the film
    --------------------------------------------------------------------------
-   · Steps: each of the six opens the film at its own moment (through the
-     page's fade: js/scroll.js __fadeJump, the film's own jump table).
-   · Figures count up once as they come on screen; the plant's roof is drawn
-     to its real share of the site.
-   · The koala changes into each flavour's colour: its overalls are found once
-     by their hue (the red of the artwork) and recoloured on a canvas laid over
-     the picture; it leans a little toward the pointer.
+   · Figures count up once as they come on screen.
+   · The koala changes into each flavour's colour and holds that flavour's bag
+     up by its top seal: its overalls are found once by their hue (the red of
+     the artwork) and recoloured on a canvas laid over the picture; the bags
+     (tools/koala_hold.py) hang under its own fist, laid back over the grip, and
+     the new one swings in on the grip as it is chosen. It leans a little
+     toward the pointer.
    · A phone's bar shows once the film is behind the reader.
    ========================================================================== */
 (function () {
   "use strict";
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine = matchMedia("(pointer: fine)").matches;
-
-  /* ---- steps → the film ---- */
-  document.querySelectorAll("[data-film-jump]").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var k = +b.getAttribute("data-film-jump");
-      var jump = window.__filmJumps && window.__filmJumps.main;
-      var film = document.querySelector('[data-film="main"]');
-      /* a film shown as its still picture (reduced motion, no WebGL) has no moments to open: its top */
-      var y = jump && !window.__filmStill ? jump(k) : (film ? film.getBoundingClientRect().top + scrollY : 0);
-      if (window.__fadeJump) window.__fadeJump(y); else window.scrollTo(0, y);
-    });
-  });
 
   /* ---- figures, counted in ---- */
   /* thousands grouped the reader's way: 37.960 in Turkish, 37,960 in English */
@@ -59,8 +47,6 @@
     once(figs, function () { counted = true; bs.forEach(count); });
     if (window.KX) window.KX.on(function () { if (counted) bs.forEach(function (b) { b.textContent = fmtOf(b)(+b.getAttribute("data-to")); }); });
   }
-  var plant = document.querySelector(".plant");
-  if (plant) once(plant, function () { plant.classList.add("is-in"); });
 
   /* ---- the koala, dressed ---- */
   var img = document.querySelector(".koala__img"), cv = document.querySelector(".koala__paint");
@@ -111,10 +97,24 @@
     var f = function (t) { t = (t + 1) % 1; return t < 1 / 6 ? p + (q - p) * 6 * t : t < 0.5 ? q : t < 2 / 3 ? p + (q - p) * (2 / 3 - t) * 6 : p; };
     return [Math.round(f(h + 1 / 3) * 255), Math.round(f(h) * 255), Math.round(f(h - 1 / 3) * 255)];
   }
+  var hold = document.querySelector(".koala__hold");
+  var bags = hold ? [].slice.call(hold.querySelectorAll("[data-bag]")) : [];
+  function holdBag(slug) {
+    if (!hold) return;
+    bags.forEach(function (im) { im.classList.toggle("is-on", im.getAttribute("data-bag") === slug); });
+    if (reduced) return;
+    hold.classList.remove("is-swinging");
+    void hold.offsetWidth;                             /* restart the swing when chosen again mid-swing */
+    hold.classList.add("is-swinging");
+  }
+  if (hold) hold.addEventListener("animationend", function () { hold.classList.remove("is-swinging"); });
   dress.forEach(function (b) {
     b.addEventListener("click", function () {
+      if (b.getAttribute("aria-pressed") === "true") return;
       dress.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
-      var go = function () { paint(b.getAttribute("data-dress")); };
+      var slug = b.getAttribute("data-dress");
+      holdBag(slug);
+      var go = function () { paint(slug); };
       if (img.complete) go(); else img.addEventListener("load", go, { once: true });
     });
   });

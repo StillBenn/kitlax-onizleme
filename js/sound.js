@@ -228,7 +228,7 @@
     { ch: 5, at: 0.81, fn: function (t) { seal(t, 0.09, layers.fx); } },                  /* the jaws close */
     { ch: 6, at: 0.72, fn: function (t) { tone(t, 1174.7, 1.6, 0.03, layers.fx); tone(t + 0.14, 1760, 1.8, 0.022, layers.fx); } }   /* the family */
   ];
-  var lastPos = -1, lastMix = 0;
+  var lastPos = -1, lastMix = 0, lastCut = 0;
   function mix() {
     var now = performance.now(), fk = lastMix ? Math.min(4, (now - lastMix) / 16.67) : 1;
     lastMix = now;
@@ -247,10 +247,10 @@
       else if (c === 6) w.music = 0.85 + 0.15 * l;
       /* the moments: crossed going forward, by a reader moving at a reading pace */
       var p = c + l;
-      if (lastPos >= 0 && p > lastPos && p - lastPos < 0.25 && !(pos.lag > 6)) {   /* a jump passes through, it does not play them */
+      if (lastPos >= 0 && p > lastPos && p - lastPos < 0.25 && !(pos.lag > 6) && pos.cut === lastCut) {   /* a jump (or a cut) passes through, it does not play them */
         MOMENTS.forEach(function (m) { var mp = m.ch + m.at; if (lastPos < mp && p >= mp) m.fn(t + 0.01); });
       }
-      lastPos = p;
+      lastPos = p; lastCut = pos.cut;
     }
     layers.hum.gain.setTargetAtTime(w.hum * 0.5, t, 0.4);
     layers.music.gain.setTargetAtTime(w.music * 1.2, t, 0.5);

@@ -6,6 +6,8 @@
    · On a flavour's page the big bag does the same, a little more.
    · Opening a flavour: the browser's own cross-document view transition flies
      the bag from the card to its page (view-transition-name bag-<slug>, CSS).
+     The card is marked chosen at the click, and stays marked as the flavour
+     last opened when the reader comes back (sessionStorage; aria-current).
    · Share: the system share sheet where there is one, the link copied where not.
    Fine pointers only for the tilt; never under reduced motion.
    ========================================================================== */
@@ -43,6 +45,35 @@
     var stage = document.querySelector("[data-tilt]");
     if (stage) tilt(document.querySelector(".ahero") || stage, stage, 9);
   }
+  /* chosen: the flavour opened last */
+  var KEY = "kx-last";
+  var cards = [].slice.call(document.querySelectorAll(".flv__link[data-flavour]"));
+  function mark(slug) {
+    cards.forEach(function (a) {
+      var on = a.getAttribute("data-flavour") === slug;
+      a.closest(".flv").classList.toggle("is-chosen", on);
+      if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+    });
+  }
+  function last() { try { return sessionStorage.getItem(KEY); } catch (e) { return null; } }
+  cards.forEach(function (a) {
+    a.addEventListener("click", function () {
+      var slug = a.getAttribute("data-flavour");
+      try { sessionStorage.setItem(KEY, slug); } catch (e) { /* marked for this page only */ }
+      mark(slug);
+    });
+  });
+  /* a flavour page marks itself as the one opened (its own card is not among the three below it) */
+  var self = document.documentElement.getAttribute("data-flavour");
+  if (self) { try { sessionStorage.setItem(KEY, self); } catch (e) { /* nothing to remember */ } }
+  mark(last());
+  /* back from a flavour page through the browser's page cache: the page was frozen before the mark */
+  addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    if (self) { try { sessionStorage.setItem(KEY, self); } catch (er) { /* nothing to remember */ } }
+    mark(last());
+  });
+
   /* a soft sound when the pointer meets a card (js/sound.js plays it only when sound is on) */
   document.querySelectorAll(".flv__link").forEach(function (a) {
     a.addEventListener("pointerenter", function () { document.dispatchEvent(new CustomEvent("kx:sfx", { detail: "hover" })); });

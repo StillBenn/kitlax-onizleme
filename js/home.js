@@ -62,12 +62,12 @@
 
   /* words arrive, part after part */
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var groups = [].slice.call(document.querySelectorAll(".sec-head, .flv-list, .step-list, .maker__text, .figures, .maker__grid, .koala__text, .koala__stage, .trade__text, .form, .made__step, .pfacts__list"));
+  var groups = [].slice.call(document.querySelectorAll(".sec-head, .flv-list, .maker__text, .figures, .maker__grid, .koala__text, .koala__stage, .trade__text, .form, .pinfo__side, .pinfo__list, .pshape__img, .pshape__text"));
   if (!reduced && "IntersectionObserver" in window && groups.length) {
     html.classList.add("rv");
     groups.forEach(function (g) {
       /* an image, a picture's stage or one step rises as one; a block rises child after child */
-      var parts = g.matches("img, .koala__stage, .made__step") ? [g] : [].slice.call(g.children);
+      var parts = g.matches("img, .koala__stage, .pshape__img") ? [g] : [].slice.call(g.children);
       parts.forEach(function (el, i) { el.classList.add("rv__p"); el.style.setProperty("--i", Math.min(i, 8)); });
     });
     var io = new IntersectionObserver(function (es) {

@@ -37,13 +37,31 @@
   veil.className = "veil";
   veil.setAttribute("aria-hidden", "true");
   document.body.appendChild(veil);
+  var jumps = 0;
   function fadeJump(to, then) {
     if (reduced) { window.scrollTo(0, to); if (then) then(); return; }
+    var mine = ++jumps;                  /* a second jump inside the first one's fade owns the veil from then on */
     veil.classList.add("is-on");
     setTimeout(function () {
+      if (mine !== jumps) return;
+      veil.classList.add("is-on");
+      window.__filmSharp = false;
       window.scrollTo(0, to);
       if (then) then();
-      requestAnimationFrame(function () { requestAnimationFrame(function () { veil.classList.remove("is-on"); }); });
+      /* landing inside the opening film: it has cut to the new moment under the veil, and the
+         veil lifts once that moment is on screen sharp (film.js __filmSharp), or after 1.5 s.
+         The film's word is only taken once it has run since the jump (__filmTick): a film that
+         was asleep off screen still carries the state it was left in. */
+      var t0 = performance.now(), frames = 0;
+      (function lift() {
+        if (mine !== jumps) return;
+        var film = document.querySelector('[data-film="main"]'), r = film && film.getBoundingClientRect();
+        var near = r && r.top < window.innerHeight && r.bottom > 0 && !window.__filmStill;
+        var fresh = (window.__filmTick || 0) > t0;
+        var ok = !near || (fresh && (film.classList.contains("is-faded") || window.__filmSharp));
+        if (++frames > 2 && (ok || performance.now() - t0 > 1500)) veil.classList.remove("is-on");
+        else requestAnimationFrame(lift);
+      })();
     }, 260);
   }
 
