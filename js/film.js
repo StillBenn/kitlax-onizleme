@@ -889,7 +889,7 @@ export async function mountFilm(root, primary = true) {
   let shown = P0, lastT = performance.now(), running = false, fpsT = lastT, fpsN = 0, fps = 0, stageO = 1, endShown = -1;
   let vel = 0, lastTarget = P0, lastShown = P0, hi = 0, hiFrames = 0, loFrames = 0, ahead = 3, stride = 1, behind = 0;
   let sharpOn = -1, missT = 0, drawn = false;     /* the sharp frame on screen (-1: none); since when none was */
-  let cuts = 0, settled = 0;                      /* cuts so far (js/sound.js skips what a cut passes over); ticks the target has held still */
+  let cuts = 0, settled = 0, wasAuto = !!AUTO;                      /* cuts so far (js/sound.js skips what a cut passes over); ticks the target has held still */
   /* the furthest point from `from` toward `to` that downloaded frames can show (never back) */
   const reach = (from, to) => {
     if (to > from) {
@@ -964,15 +964,18 @@ export async function mountFilm(root, primary = true) {
        takes over: the playhead eases on from wherever the pen had got to) */
     autoP = AUTO ? (introT0 ? Math.min(1, (now - introT0) / AUTO_MS) : 0) : 1;
     let target = frameAt(p * totalVh + vh0);
-    if (autoP < 1 && scrollY - top < 2) target = autoP * AUTO;
+    const onAuto = autoP < 1 && scrollY - top < 2;
+    if (onAuto) target = autoP * AUTO;
     const leap = Math.abs(target - lastTarget);
     settled = leap < 1 ? settled + 1 : 0;
     /* a cut: a jump, or a playhead far behind once the reader's own moment is
        here (in the hold, the film's end: the frame the page behind it matches) */
-    if ((leap > CUT && leap / rawDt > JUMPV) || ((Math.abs(target - shown) > LEAP || (hold > 0 && Math.abs(target - shown) > 1)) && store.bitmaps.has(Math.floor(target)))) {
+    /* (the reader taking over from the autoplay mid-way is no jump: the playhead
+       eases on from where it had got to, through frames the opening decoded) */
+    if ((leap > CUT && leap / rawDt > JUMPV && !(wasAuto && leap < 60)) || ((Math.abs(target - shown) > LEAP || (hold > 0 && Math.abs(target - shown) > 1)) && store.bitmaps.has(Math.floor(target)))) {
       shown = lastShown = target; vel = 0; sharpOn = -1; cuts++; guard.jumpT = now;
     }
-    lastTarget = target;
+    lastTarget = target; wasAuto = onAuto;
     /* From a sharp picture the film moves on only through frames that have
        arrived; a playhead already among frames that have not (just after a cut)
        goes where the reader is. */
@@ -1068,13 +1071,19 @@ export async function mountFilm(root, primary = true) {
     const lag = Math.abs(target - shown);
     if (lag > 12) guard.jumpT = now;
     const reading = now - guard.jumpT > 1200;
-    if (tier === "hd" && !forced && introT0 && now - introT0 > 1500 && reading && !making.size && (lag > 0.3 || spd > 2)) {
+    /* A phone is judged while it flicks too, on decoding alone: frames that
+       arrived long ago and are still not decoded while the picture stands far
+       from the playhead. (A 4x slower phone in HD ran 23 frames behind through
+       a fast flick and fell to the atlas one tick in ten: measured, flick.mjs.
+       Slow FRAMES are only judged at a reading pace: a flick's are expected.) */
+    const flicking = !fine && !reading && behind > 8;
+    if (tier === "hd" && !forced && introT0 && now - introT0 > 1500 && (reading || flicking) && !making.size && (lag > 0.3 || spd > 2)) {
       guard.n++;
-      if (dt > 0.024) guard.slow++;
+      if (reading && dt > 0.024) guard.slow++;
       /* late = downloaded a while ago and still not decoded: the device, not
          the network (on the live site frames often land right under the
          playhead, and that is the link being slow, not the phone) */
-      if ((!hiTarget || behind > 2.5) && store.blobs[a] && store.blobs[b] && now - Math.max(store.gotAt[a], store.gotAt[b]) > 250) guard.late++;
+      if ((!hiTarget || behind > 2.5) && store.blobs[a] && store.blobs[b] && now - Math.max(store.gotAt[a], store.gotAt[b]) > (flicking ? 500 : 250)) guard.late++;
       if (guard.n >= 40) {
         if (guard.slow > 10 || guard.late > 13) {
           if (probe) probe.why = { slow: guard.slow, late: guard.late, at: +shown.toFixed(1), t: Math.round(now - introT0), dt: +(dt * 1000).toFixed(1) };
