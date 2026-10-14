@@ -5,7 +5,7 @@
    bags (48 a case) and net weight (1.92 kg a case). A static site has nowhere
    to post a form to: the request — the cases per flavour, the totals, every
    field — is written out as an e-mail to the company's own address, ready to
-   send from the visitor's mail app; or copied, to paste anywhere.
+   send from the visitor's mail app.
    Required: a name, a place and a way to reach them.
    A flavour page's "request an offer" arrives as ?aroma=<slug>: that flavour
    starts at one case.
@@ -29,13 +29,13 @@
   var n = function (el) { var v = parseInt(el.value, 10); return isFinite(v) && v > 0 ? Math.min(v, 9999) : 0; };
   var num = function (v, dec) {
     var lang = window.KX ? window.KX.lang() : "tr";
-    return v.toLocaleString(lang === "en" ? "en-GB" : "tr-TR", { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+    return v.toLocaleString(lang === "tr" ? "tr-TR" : "en-GB", { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
   };
   function total() {
     var koli = inputs.reduce(function (s, el) { return s + n(el); }, 0);
     sums.koli.textContent = num(koli);
     sums.paket.textContent = num(koli * PER_CASE);
-    sums.kg.textContent = num(koli * KG_CASE, koli ? 2 : 0) + " kg";
+    sums.kg.textContent = num(koli * KG_CASE, koli ? 2 : 0) + " " + t("kg");
     return koli;
   }
   form.querySelectorAll("[data-step]").forEach(function (b) {
@@ -69,7 +69,7 @@
     lines.push(t("Aroma başına koli") + ":");
     inputs.forEach(function (el) { if (n(el)) lines.push("  · " + t(el.getAttribute("data-name")) + ": " + num(n(el)) + " " + t("koli")); });
     if (!koli) lines.push("  —");
-    lines.push(t("Toplam koli") + ": " + num(koli) + " · " + t("Toplam paket") + ": " + num(koli * PER_CASE) + " · " + t("Net ağırlık") + ": " + num(koli * KG_CASE, koli ? 2 : 0) + " kg");
+    lines.push(t("Toplam koli") + ": " + num(koli) + " · " + t("Toplam paket") + ": " + num(koli * PER_CASE) + " · " + t("Net ağırlık") + ": " + num(koli * KG_CASE, koli ? 2 : 0) + " " + t("kg"));
     if (get("msg")) { lines.push(""); lines.push(get("msg")); }
     return lines.join("\n");
   }
@@ -88,15 +88,9 @@
     e.preventDefault();
     if (!valid()) return;
     var place = form.elements.place.value.trim();
-    var href = "mailto:" + TO + "?subject=" + encodeURIComponent(t("Yeni distribütörlük talebi") + " — " + place) + "&body=" + encodeURIComponent(letter());
+    var href = "mailto:" + TO + "?subject=" + encodeURIComponent(t("Yeni temsilcilik talebi") + " — " + place) + "&body=" + encodeURIComponent(letter());
     say("Mesajınız e-posta olarak hazırlandı; e-posta uygulamanızdan gönderin.");
     document.dispatchEvent(new CustomEvent("kx:sfx", { detail: "send" }));
     location.href = href;
-  });
-  var copy = form.querySelector("[data-copy]");
-  if (copy) copy.addEventListener("click", function () {
-    if (!valid()) return;
-    var done = function () { say("Talebiniz kopyalandı; dilediğiniz yere yapıştırın."); };
-    if (navigator.clipboard) navigator.clipboard.writeText(letter()).then(done, function () {});
   });
 })();

@@ -3,8 +3,11 @@
    --------------------------------------------------------------------------
    The page opens sounding and the button in the header turns it off.
    Browsers let a page make sound only after the visitor's first gesture, so
-   it starts on the first click, tap or key anywhere (at once where the
-   browser already allows it). Everything is made here with the Web Audio
+   it is switched on as the page opens — and sounds at once wherever the
+   browser already allows it (a page reached by a click on this site, a site
+   the browser trusts) — or else on the first click, tap or key anywhere
+   (a wheel or a swipe is not a gesture to a browser). It starts at full
+   voice on the next beat: the first chord, no slow fade. Everything is made here with the Web Audio
    API — no files to download:
 
      music  : a slow, warm bed — a felt-damped electric piano (FM) rolling
@@ -230,7 +233,10 @@
   ];
   var lastPos = -1, lastMix = 0, lastCut = 0;
   function mix() {
-    var now = performance.now(), fk = lastMix ? Math.min(4, (now - lastMix) / 16.67) : 1;
+    /* not allowed to sound yet: nothing is scheduled (the moments the reader
+       scrolls past would all be queued at a frozen clock and burst out together) */
+    if (ctx.state !== "running") { lastPos = -1; lastMix = 0; raf = requestAnimationFrame(mix); return; }
+    var now = performance.now(), first = !lastMix, fk = lastMix ? Math.min(4, (now - lastMix) / 16.67) : 1;
     lastMix = now;
     var pos = window.__filmPos, L = window.__filmLayout;
     var past = L ? Math.min(1, Math.max(0, (scrollY - L.start) / (innerHeight * 0.8))) : 1;
@@ -252,8 +258,8 @@
       }
       lastPos = p; lastCut = pos.cut;
     }
-    layers.hum.gain.setTargetAtTime(w.hum * 0.5, t, 0.4);
-    layers.music.gain.setTargetAtTime(w.music * 1.2, t, 0.5);
+    layers.hum.gain.setTargetAtTime(w.hum * 0.5, t, first ? 0.02 : 0.4);
+    layers.music.gain.setTargetAtTime(w.music * 1.2, t, first ? 0.02 : 0.5);
     /* wheat: air moving round the ear — a slow swell now and then, never a steady hiss */
     if (w.air > 0.05 && Math.random() < 0.006 * fk) swell(t, 2.2 + Math.random() * 1.6, 500 + Math.random() * 400, 0.02 * w.air, layers.fx);
     /* semolina: grains running — tiny, sparse, at random */
@@ -275,8 +281,8 @@
     if (on) {
       if (!ctx) build();
       ctx.resume();
-      if (nextBar < ctx.currentTime) nextBar = ctx.currentTime + 0.3;
-      master.gain.setTargetAtTime(0.6, ctx.currentTime, 0.4);
+      if (nextBar < ctx.currentTime + 0.02) nextBar = ctx.currentTime + 0.02;
+      master.gain.setTargetAtTime(0.6, ctx.currentTime, 0.03);
       if (!raf) raf = requestAnimationFrame(mix);
     } else if (ctx) {
       master.gain.setTargetAtTime(0, ctx.currentTime, 0.15);
@@ -298,7 +304,7 @@
     if (e.target && e.target.closest && e.target.closest("[data-sound]")) return;
     if (e.type === "keydown" && (e.metaKey || e.ctrlKey || e.altKey || /^(Shift|Control|Alt|Meta|Tab|Escape)$/.test(e.key))) return;
     if (!wanted) { arm(false); return; }
-    if (!on) set(true); else if (ctx && ctx.state !== "running") ctx.resume();
+    if (!on) set(true); else if (ctx && ctx.state !== "running") { ctx.resume(); if (nextBar < ctx.currentTime + 0.02) nextBar = ctx.currentTime + 0.02; }
     if (ctx && ctx.state === "running") arm(false);
     else if (ctx) ctx.resume().then(function () { if (ctx.state === "running") arm(false); }, function () {});
   }
@@ -310,8 +316,7 @@
     arm(false);
   });
   if (wanted) {
-    var policy = navigator.getAutoplayPolicy ? navigator.getAutoplayPolicy("audiocontext") : "";
-    if (policy === "allowed") set(true);
+    set(true);                        /* sounds now if allowed; otherwise waits, switched on, for the first gesture */
     arm(true);
   }
   if (/[?&]probe/.test(location.search)) window.__sound = { ctx: function () { return ctx; }, master: function () { return master; } };

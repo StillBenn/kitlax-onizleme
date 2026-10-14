@@ -1,20 +1,22 @@
 /* ==========================================================================
-   Turkish and English
+   Turkish, English and Arabic
    --------------------------------------------------------------------------
-   The page is written in Turkish; English is a dictionary keyed by the
-   Turkish text itself (whitespace-normalised), applied to text nodes and to
-   alt / aria-label / placeholder / title. The original text of every node is
-   kept, so switching back and forth always translates from the source.
-   A first visit follows the browser's language; a choice is remembered.
+   The page is written in Turkish; English and Arabic are dictionaries keyed
+   by the Turkish text itself (whitespace-normalised), applied to text nodes
+   and to alt / aria-label / placeholder / title. The original text of every
+   node is kept, so switching always translates from the source. Arabic
+   turns the page right-to-left (html dir="rtl"; css/site.css mirrors what
+   sits on a side). A first visit follows the browser's language; a choice
+   is remembered.
    ========================================================================== */
 (function () {
   "use strict";
   var EN = {
+    "kg": "kg",
     "Kıtlax — Makarna Cipsi": "Kıtlax — Macaroni Crispy",
     "İçeriğe geç": "Skip to content",
     "Kıtlax — ana sayfa": "Kıtlax — home",
     "Ana menü": "Main menu",
-    "Aromalar": "Flavours",
     "Hakkımızda": "About us",
     "İletişim": "Contact",
     "Dil": "Language",
@@ -25,7 +27,6 @@
     "Makarnanın": "Pasta at its",
     "en çıtır hali.": "crispiest.",
     "Durum buğdayı irmiğinden, günde 300 ton makarna üreten tesisimizde.": "From durum wheat semolina, in our plant that makes 300 tonnes of pasta a day.",
-    "Dört şekil, dört aroma": "Four shapes, four flavours",
     "Tekerlek,": "Wheels,",
     "acı tako aromalı.": "hot taco flavoured.",
     "Kabuk,": "Shells,",
@@ -34,7 +35,6 @@
     "süt mısırı aromalı.": "sweet corn flavoured.",
     "Burgu,": "Twists,",
     "ketçap aromalı.": "ketchup flavoured.",
-    "Kıtlax ailesi": "The Kıtlax family",
     "dört aroma.": "four flavours.",
     "Filmi geç": "Skip the film",
     "Kaydırın": "Scroll",
@@ -64,10 +64,7 @@
     "Maskotumuz": "Our mascot",
     "Her pakette": "A koala",
     "bir koala.": "on every bag.",
-    "Her aromanın paketinde, o aromanın renginde tulumuyla.": "On each flavour's bag, in dungarees of that flavour's colour.",
     "İhracat ve distribütörlük": "Export and distribution",
-    "Kıtlax'ı": "Bring Kıtlax",
-    "ülkenize getirin.": "to your country.",
     "Bölgenizde Kıtlax satmak için bize yazın. Aroma karışımına ve koli adedine göre teklif hazırlayalım.": "Write to us to sell Kıtlax in your region. We will prepare an offer for your mix of flavours and number of cases.",
     "Koli: 40 g × 48 paket.": "Case: 40 g × 48 bags.",
     "Ad soyad": "Full name",
@@ -82,7 +79,6 @@
     "Tüm hakları saklıdır.": "All rights reserved.",
     "Lütfen adınızı, ülkenizi ve size ulaşabileceğimiz bir yolu yazın.": "Please write your name, your country and a way to reach you.",
     "Mesajınız e-posta olarak hazırlandı; e-posta uygulamanızdan gönderin.": "Your message is ready as an e-mail; send it from your mail app.",
-    "Yeni distribütörlük talebi": "New distribution request",
     "Ses": "Sound",
     "01 — Buğday": "01 — Wheat",
     "Her şey": "It all starts",
@@ -118,18 +114,10 @@
     "Toplam paket": "Total bags",
     "Aile": "Family",
     "Makarna cipsi, bu tecrübenin atıştırmalığa dönüşmüş hali: aynı irmik, aynı kalıplar, aynı titizlik — sadece çıtır.": "Macaroni crisps are that experience made into a snack: the same semolina, the same dies, the same care — only crunchy.",
-    "Tesis": "The plant",
-    "alanın": "site,",
     "Kalite": "Quality",
     "FDA kaydı": "FDA registration",
-    "ABD Gıda ve İlaç Dairesi kaydıyla ihracat": "Exported under US Food and Drug Administration registration",
     "Koşer (OU-D)": "Kosher (OU-D)",
-    "Her poşette koşer sertifika işareti": "A kosher certification mark on every bag",
     "Durum buğdayı irmiği": "Durum wheat semolina",
-    "Hammaddesi un değil, irmik": "Made from semolina, not flour",
-    "Aroma başına koli adedini seçin.": "Choose the number of cases per flavour.",
-    "Bilgilerinizi yazın.": "Write your details.",
-    "Talebiniz e-posta olarak hazırlanır; tek tuşla gönderin.": "Your request is written out as an e-mail; send it with one tap.",
     "Aroma başına koli": "Cases per flavour",
     "Ketçap: bir koli azalt": "Ketchup: one case less",
     "Ketçap koli": "Ketchup cases",
@@ -147,8 +135,6 @@
     "Net ağırlık": "Net weight",
     "koli": "cases",
     "1 koli = 48 paket × 40 g = 1,92 kg net.": "1 case = 48 bags × 40 g = 1.92 kg net.",
-    "Talebi kopyala": "Copy the request",
-    "Talebiniz kopyalandı; dilediğiniz yere yapıştırın.": "Your request is copied; paste it wherever you like.",
     "Hızlı erişim": "Quick access",
     "Teklif iste": "Request an offer",
     "Beşsan Makarna Gıda San. ve Tic. A.Ş.": "Beşsan Makarna Gıda San. ve Tic. A.Ş.",
@@ -172,7 +158,6 @@
     "Ürün bilgileri": "Product facts",
     "Hammadde": "Raw material",
     "Sertifika işareti": "Certification mark",
-    "bize yazın": "write to us",
     "Diğer aromalar": "Other flavours",
     "Ailenin": "The rest of",
     "diğerleri.": "the family.",
@@ -202,8 +187,6 @@
     "bir aile.": "after five brothers.",
     "Beşler'in Gaziantep'teki yolu bir un fabrikasıyla başladı; adı, onu kuran beş kardeşten gelir. Grup bugün undan irmiğe, irmikten makarnaya uzanan bir zincirde üretiyor.": "Beşler's road in Gaziantep began with a flour mill; its name comes from the five brothers who founded it. Today the group works along one chain, from flour to semolina and from semolina to pasta.",
     "Beşler Makarna 2004'ten beri bu çatının altında. Kıtlax onun makarna cipsi: Beşler'in irmiği ve titizliği, çıtır bir atıştırmalıkta.": "Beşler Makarna has been part of it since 2004. Kıtlax is its macaroni crisp: Beşler's semolina and care, in a crunchy snack.",
-    "Üç dilli ambalaj": "Trilingual packaging",
-    "Türkçe, İngilizce ve Arapça: ihracata hazır": "Turkish, English and Arabic: ready for export",
     "Kıtlax'ın koalası, bileğine bağlı iple seçtiğiniz aromanın paketini taşıyor": "The Kıtlax koala carrying the bag of the flavour you pick, on a cord tied round its wrist",
     "Her aromanın paketinde, o aromanın renginde tulumuyla. Bir aroma seçin: koala onun paketini tutsun.": "On each flavour's bag, in dungarees of that flavour's colour. Pick a flavour and the koala holds up its bag.",
     "Koalanın aroması": "The koala's flavour",
@@ -225,9 +208,255 @@
     "Kıtlax Peynir: kabuk şekli, çeşnisiyle": "Kıtlax Cheese: the shell, seasoned",
     "Kıtlax Süt Mısırı: rulo şekli, çeşnisiyle": "Kıtlax Sweet Corn: the spiral, seasoned",
     "Kıtlax Acı Tako: tekerlek şekli, çeşnisiyle": "Kıtlax Hot Taco: the wheel, seasoned",
-    "Şekil ve aroma": "Shape and flavour"
+    "Şekil ve aroma": "Shape and flavour",
+    "Ürünlerimiz": "Our products",
+    "Belgeli kalite,": "Certified quality,",
+    "her pakette.": "in every bag.",
+    "Tesisimiz ABD Gıda ve İlaç Dairesi'ne (FDA) kayıtlı bir gıda tesisidir. Ürünlerimiz Amerika Birleşik Devletleri'ne bu kayıtla ihraç edilir.": "Our plant is a food facility registered with the US Food and Drug Administration (FDA). Our products are exported to the United States under this registration.",
+    "Koşer sertifikası (OU‑D)": "Kosher certification (OU‑D)",
+    "Ürünlerimiz Orthodox Union (OU) denetiminde koşer sertifikalıdır. İhracat poşetlerimizdeki OU‑D işareti, ürünün koşer olduğunu ve süt içerdiğini gösterir.": "Our products are certified kosher under the supervision of the Orthodox Union (OU). The OU‑D mark on our export bags shows that the product is kosher and contains dairy.",
+    "Buğdaydan pakete tek zincir": "One chain, from wheat to bag",
+    "Hammaddemiz Beşler'in kendi zincirinden gelir: buğday irmiğe, irmik makarnaya aynı grubun tesislerinde dönüşür. Her adım tek elde, aynı standartla yürür.": "Our raw material comes from Beşler's own chain: wheat becomes semolina, and semolina becomes pasta, in the same group's plants. Every step stays in one pair of hands, held to one standard.",
+    "Isıyla mühürlü tazelik": "Heat-sealed freshness",
+    "Poşet dolduğu anda ısıyla mühürlenir. Çıtırlık ve aroma, paket açılana kadar ilk günkü gibi içinde kalır.": "The bag is heat-sealed the moment it is filled. The crunch and the flavour stay inside, as on the first day, until it is opened.",
+    "Belgeler": "Documents",
+    "FDA kayıt belgesi": "FDA registration",
+    "ABD'ye gıda ihracatı için tesis kaydı.": "The facility registration for food exports to the US.",
+    "Koşer sertifikası": "Kosher certificate",
+    "Ürünlerimizin koşer olduğunu belgeler; D, süt içerdiğini gösterir.": "Certifies that our products are kosher; the D shows they contain dairy.",
+    "Temsilcimiz": "Become our",
+    "olun.": "representative.",
+    "Bilgilerinizi ve mesajınızı yazın.": "Write your details and your message.",
+    "Dilerseniz aroma başına koli adedini seçin.": "If you like, choose the cases per flavour.",
+    "Mesajınız e-posta olarak hazırlanır; tek tuşla gönderin.": "Your message is written out as an e-mail; send it with one tap.",
+    "Mesaj gönder": "Send message",
+    "Yeni temsilcilik talebi": "New representation request"
   };
+  var AR = {
+    "kg": "كغ",
+    "Kıtlax — Makarna Cipsi": "Kıtlax — رقائق المعكرونة",
+    "İçeriğe geç": "انتقل إلى المحتوى",
+    "Kıtlax — ana sayfa": "Kıtlax — الصفحة الرئيسية",
+    "Ana menü": "القائمة الرئيسية",
+    "Hakkımızda": "من نحن",
+    "İletişim": "اتصل بنا",
+    "Dil": "اللغة",
+    "Distribütör olun": "كن موزّعًا لنا",
+    "Kıtlax — film": "Kıtlax — الفيلم",
+    "Kıtlax makarna cipsleri": "رقائق المعكرونة Kıtlax",
+    "Kıtlax · Makarna Cipsi": "Kıtlax · رقائق المعكرونة",
+    "Makarnanın": "المعكرونة",
+    "en çıtır hali.": "في أقرمش حالاتها.",
+    "Durum buğdayı irmiğinden, günde 300 ton makarna üreten tesisimizde.": "من سميد القمح الصلب، في مصنعنا الذي ينتج 300 طن من المعكرونة يوميًا.",
+    "Tekerlek,": "عجلات،",
+    "acı tako aromalı.": "بنكهة التاكو الحارة.",
+    "Kabuk,": "أصداف،",
+    "peynir aromalı.": "بنكهة الجبن.",
+    "Rulo,": "لفائف،",
+    "süt mısırı aromalı.": "بنكهة الذرة الحلوة.",
+    "Burgu,": "لوالب،",
+    "ketçap aromalı.": "بنكهة الكاتشب.",
+    "dört aroma.": "أربع نكهات.",
+    "Filmi geç": "تخطَّ الفيلم",
+    "Kaydırın": "مرّر للأسفل",
+    "Her şekil": "لكل شكل",
+    "Kıtlax ailesi.": "عائلة Kıtlax.",
+    "Ketçap": "كاتشب",
+    "Peynir": "جبن",
+    "Süt Mısırı": "ذرة حلوة",
+    "Acı Tako": "تاكو حار",
+    "Burgu · 40 g": "لولب · 40 غ",
+    "Kabuk · 40 g": "صدفة · 40 غ",
+    "Rulo · 40 g": "لفافة · 40 غ",
+    "Tekerlek · 40 g": "عجلة · 40 غ",
+    "Kıtlax Ketçap aromalı paket": "كيس Kıtlax بنكهة الكاتشب",
+    "Kıtlax Peynir aromalı paket": "كيس Kıtlax بنكهة الجبن",
+    "Kıtlax Süt Mısırı aromalı paket": "كيس Kıtlax بنكهة الذرة الحلوة",
+    "Kıtlax Acı Tako aromalı paket": "كيس Kıtlax بنكهة التاكو الحارة",
+    "Makarnayı bilen": "من صانعٍ",
+    "bir üreticiden.": "يعرف المعكرونة جيدًا.",
+    "Günlük üretim": "الإنتاج اليومي",
+    "ton": "طن",
+    "İhracat": "التصدير",
+    "ülke": "دولة",
+    "Tecrübe": "الخبرة",
+    "yıl": "عامًا",
+    "Tesis alanı": "مساحة المصنع",
+    "Maskotumuz": "تميمتنا",
+    "Her pakette": "في كل كيس",
+    "bir koala.": "كوالا.",
+    "İhracat ve distribütörlük": "التصدير والتوزيع",
+    "Bölgenizde Kıtlax satmak için bize yazın. Aroma karışımına ve koli adedine göre teklif hazırlayalım.": "راسلنا لبيع Kıtlax في منطقتك، وسنُعدّ لك عرضًا وفق مزيج النكهات وعدد الكراتين.",
+    "Koli: 40 g × 48 paket.": "الكرتونة: 40 غ × 48 كيسًا.",
+    "Ad soyad": "الاسم الكامل",
+    "Firma": "الشركة",
+    "Ülke / şehir": "الدولة / المدينة",
+    "E-posta veya telefon": "البريد الإلكتروني أو الهاتف",
+    "Mesajınız": "رسالتك",
+    "Tahmini adet, teslim yeri, sorularınız": "الكمية التقديرية، مكان التسليم، أسئلتك",
+    "Teklif isteyin": "اطلب عرض سعر",
+    "Adres": "العنوان",
+    "© 2026 Kıtlax Makarna Cipsi": "© 2026 Kıtlax رقائق المعكرونة",
+    "Tüm hakları saklıdır.": "جميع الحقوق محفوظة.",
+    "Lütfen adınızı, ülkenizi ve size ulaşabileceğimiz bir yolu yazın.": "يُرجى كتابة اسمك ودولتك ووسيلة للتواصل معك.",
+    "Mesajınız e-posta olarak hazırlandı; e-posta uygulamanızdan gönderin.": "رسالتك جاهزة كبريد إلكتروني؛ أرسلها من تطبيق البريد لديك.",
+    "Ses": "الصوت",
+    "01 — Buğday": "01 — القمح",
+    "Her şey": "كل شيء",
+    "durum buğdayıyla başlar.": "يبدأ بالقمح الصلب.",
+    "Sert, kehribar renkli durum buğdayı: iyi makarnanın hammaddesi.": "قمح صلب بلون الكهرمان: المادة الخام للمعكرونة الجيدة.",
+    "Buğday öğütülür,": "يُطحن القمح",
+    "irmik olur.": "فيصير سميدًا.",
+    "Makarnamızı un değil, iri taneli durum irmiği ile yaparız.": "نصنع معكرونتنا من سميد القمح الصلب الخشن، لا من الدقيق.",
+    "03 — Şekil": "03 — الشكل",
+    "Hamur kalıptan geçer,": "تمرّ العجينة عبر القالب",
+    "şeklini alır.": "فتأخذ شكلها.",
+    "Bıçak her turda kalıbın yüzünü süpürür: tekerlek, kabuk, rulo, burgu.": "مع كل دورة تمسح السكّين وجه القالب: عجلات، أصداف، لفائف، لوالب.",
+    "04 — Çıtırlık": "04 — القرمشة",
+    "Isıyla kabarır,": "تنتفخ بالحرارة",
+    "altın rengini alır.": "وتكتسب لونها الذهبي.",
+    "Hamur hafifler, kabarır ve çıtırlaşır.": "تخفّ العجينة وتنتفخ وتصير مقرمشة.",
+    "05 — Aroma": "05 — النكهة",
+    "kendi aromasıyla.": "نكهته الخاصة.",
+    "Acı Tako, Peynir, Süt Mısırı, Ketçap: her şeklin kendi çeşnisi var.": "تاكو حار، جبن، ذرة حلوة، كاتشب: لكل شكل تتبيلته الخاصة.",
+    "06 — Paket": "06 — الكيس",
+    "40 gramlık poşette,": "في كيس من 40 غرامًا،",
+    "taze ve çıtır.": "طازجة ومقرمشة.",
+    "Poşet doldurulur ve ısıyla mühürlenir; çıtırlık açılana kadar içinde kalır.": "يُملأ الكيس ويُغلق حراريًا؛ فتبقى القرمشة في داخله حتى يُفتح.",
+    "Dört şekil,": "أربعة أشكال،",
+    "02 — Öğütme": "02 — الطحن",
+    "Filmin bölümleri": "أجزاء الفيلم",
+    "Buğday": "القمح",
+    "Öğütme": "الطحن",
+    "Kalıp": "القالب",
+    "Çıtırlık": "القرمشة",
+    "Aroma": "النكهة",
+    "Paket": "الكيس",
+    "Toplam paket": "إجمالي الأكياس",
+    "Aile": "العائلة",
+    "Makarna cipsi, bu tecrübenin atıştırmalığa dönüşmüş hali: aynı irmik, aynı kalıplar, aynı titizlik — sadece çıtır.": "رقائق المعكرونة هي هذه الخبرة وقد صارت وجبة خفيفة: السميد نفسه، والقوالب نفسها، والعناية نفسها — لكنها مقرمشة.",
+    "Kalite": "الجودة",
+    "FDA kaydı": "تسجيل FDA",
+    "Koşer (OU-D)": "كوشر (OU-D)",
+    "Durum buğdayı irmiği": "سميد القمح الصلب",
+    "Aroma başına koli": "عدد الكراتين لكل نكهة",
+    "Ketçap: bir koli azalt": "كاتشب: كرتونة أقل",
+    "Ketçap koli": "كراتين الكاتشب",
+    "Ketçap: bir koli artır": "كاتشب: كرتونة إضافية",
+    "Peynir: bir koli azalt": "جبن: كرتونة أقل",
+    "Peynir koli": "كراتين الجبن",
+    "Peynir: bir koli artır": "جبن: كرتونة إضافية",
+    "Süt Mısırı: bir koli azalt": "ذرة حلوة: كرتونة أقل",
+    "Süt Mısırı koli": "كراتين الذرة الحلوة",
+    "Süt Mısırı: bir koli artır": "ذرة حلوة: كرتونة إضافية",
+    "Acı Tako: bir koli azalt": "تاكو حار: كرتونة أقل",
+    "Acı Tako koli": "كراتين التاكو الحار",
+    "Acı Tako: bir koli artır": "تاكو حار: كرتونة إضافية",
+    "Toplam koli": "إجمالي الكراتين",
+    "Net ağırlık": "الوزن الصافي",
+    "koli": "كرتونة",
+    "1 koli = 48 paket × 40 g = 1,92 kg net.": "كرتونة واحدة = 48 كيسًا × 40 غ = 1.92 كغ صافٍ.",
+    "Hızlı erişim": "وصول سريع",
+    "Teklif iste": "اطلب عرضًا",
+    "Beşsan Makarna Gıda San. ve Tic. A.Ş.": "Beşsan Makarna Gıda San. ve Tic. A.Ş.",
+    "1. Organize Sanayi Bölgesi": "المنطقة الصناعية المنظّمة الأولى",
+    "83101 Cad. No: 37": "شارع 83101، رقم 37",
+    "Şehitkamil / Gaziantep": "شهيد كامل / غازي عنتاب، تركيا",
+    "Tüm aromalar": "كل النكهات",
+    "Kıtlax · Makarna Cipsi · 40 g": "Kıtlax · رقائق المعكرونة · 40 غ",
+    "Bu aroma için teklif isteyin": "اطلب عرض سعر لهذه النكهة",
+    "Paylaş": "مشاركة",
+    "Bağlantı kopyalandı.": "تم نسخ الرابط.",
+    "Şekil": "الشكل",
+    "Net": "الصافي",
+    "40 g": "40 غ",
+    "Koli": "الكرتونة",
+    "48 paket": "48 كيسًا",
+    "Burgu": "لولب",
+    "Kabuk": "صدفة",
+    "Rulo": "لفافة",
+    "Tekerlek": "عجلة",
+    "Ürün bilgileri": "معلومات المنتج",
+    "Hammadde": "المادة الخام",
+    "Sertifika işareti": "علامة الشهادة",
+    "Diğer aromalar": "نكهات أخرى",
+    "Ailenin": "بقية",
+    "diğerleri.": "العائلة.",
+    "Ketçap aromalı, burgu şeklinde makarna cipsi. Kırmızı poşette, 40 gram.": "رقائق معكرونة بنكهة الكاتشب على شكل لوالب. في الكيس الأحمر، 40 غرامًا.",
+    "Peynir aromalı, oluklu kabuk şeklinde makarna cipsi. Yeşil poşette, 40 gram.": "رقائق معكرونة بنكهة الجبن على شكل أصداف مضلّعة. في الكيس الأخضر، 40 غرامًا.",
+    "Süt mısırı aromalı, rulo şeklinde makarna cipsi. Turkuaz poşette, 40 gram.": "رقائق معكرونة بنكهة الذرة الحلوة على شكل لفائف. في الكيس الفيروزي، 40 غرامًا.",
+    "Acı tako aromalı, tekerlek şeklinde makarna cipsi. Mavi poşette, 40 gram.": "رقائق معكرونة بنكهة التاكو الحارة على شكل عجلات. في الكيس الأزرق، 40 غرامًا.",
+    "Hamur bronz kalıptan geçer; iki iplik birbirine sarılır, bıçak her turda bir burgu keser.": "تمرّ العجينة عبر قالب برونزي؛ يلتفّ خيطان أحدهما حول الآخر، وتقطع السكّين مع كل دورة لولبًا.",
+    "Burgular ketçap çeşnisiyle kaplanır.": "تُغطّى اللوالب بتتبيلة الكاتشب.",
+    "Hamur bronz kalıptan oluklu bir şerit olarak çıkar; bıçak her turda bir kabuk keser.": "تخرج العجينة من القالب البرونزي شريطًا مضلّعًا؛ وتقطع السكّين مع كل دورة صدفة.",
+    "Kabuklar peynir çeşnisiyle kaplanır; oluklar çeşniyi tutar.": "تُغطّى الأصداف بتتبيلة الجبن؛ وتحتفظ أخاديدها بالتتبيلة.",
+    "Hamur bronz kalıptan ince bir şerit olarak çıkar ve kendi üstüne sarılarak rulo olur.": "تخرج العجينة من القالب البرونزي شريطًا رفيعًا يلتفّ حول نفسه فيصير لفافة.",
+    "Rulolar süt mısırı çeşnisiyle kaplanır.": "تُغطّى اللفائف بتتبيلة الذرة الحلوة.",
+    "Hamur bronz kalıbın tekerlek deliklerinden çıkar; bıçak her turda bir tekerlek keser.": "تخرج العجينة من فتحات القالب البرونزي ذات شكل العجلة؛ وتقطع السكّين مع كل دورة عجلة.",
+    "Tekerlekler acı tako çeşnisiyle kaplanır.": "تُغطّى العجلات بتتبيلة التاكو الحارة.",
+    "Kıtlax Ketçap — Makarna Cipsi": "Kıtlax كاتشب — رقائق المعكرونة",
+    "Kıtlax Peynir — Makarna Cipsi": "Kıtlax جبن — رقائق المعكرونة",
+    "Kıtlax Süt Mısırı — Makarna Cipsi": "Kıtlax ذرة حلوة — رقائق المعكرونة",
+    "Kıtlax Acı Tako — Makarna Cipsi": "Kıtlax تاكو حار — رقائق المعكرونة",
+    "Bir aromaya dokunun: tüm detaylarını görün.": "اختر نكهة لترى كل تفاصيلها.",
+    "Son baktığınız": "آخر ما شاهدته",
+    "Detayları incele": "عرض التفاصيل",
+    "Kıtlax, Beşler Makarna'nın markasıdır. Makarnamızı Gaziantep 1. Organize Sanayi Bölgesi'ndeki tesisimizde durum buğdayı irmiğinden üretiyor, 30 ülkeye gönderiyoruz.": "Kıtlax علامة تجارية لشركة Beşler Makarna. ننتج معكرونتنا من سميد القمح الصلب في مصنعنا بالمنطقة الصناعية المنظّمة الأولى في غازي عنتاب، ونصدّرها إلى 30 دولة.",
+    "Beşler — Yıllardır değişmeyen kalite": "Beşler — جودة لم تتغيّر منذ سنوات",
+    "Bir Beşler markası": "علامة من Beşler",
+    "Adını beş kardeşten alan": "عائلة استمدّت اسمها",
+    "bir aile.": "من خمسة إخوة.",
+    "Beşler'in Gaziantep'teki yolu bir un fabrikasıyla başladı; adı, onu kuran beş kardeşten gelir. Grup bugün undan irmiğe, irmikten makarnaya uzanan bir zincirde üretiyor.": "بدأت مسيرة Beşler في غازي عنتاب بمطحنة دقيق، ويعود اسمها إلى الإخوة الخمسة الذين أسّسوها. واليوم تُنتج المجموعة عبر سلسلة واحدة تمتد من الدقيق إلى السميد، ومن السميد إلى المعكرونة.",
+    "Beşler Makarna 2004'ten beri bu çatının altında. Kıtlax onun makarna cipsi: Beşler'in irmiği ve titizliği, çıtır bir atıştırmalıkta.": "تنضوي Beşler Makarna تحت هذه المظلّة منذ عام 2004. وKıtlax هي رقائق المعكرونة الخاصة بها: سميد Beşler وعنايتها، في وجبة خفيفة مقرمشة.",
+    "Kıtlax'ın koalası, bileğine bağlı iple seçtiğiniz aromanın paketini taşıyor": "كوالا Kıtlax يحمل كيس النكهة التي تختارها بخيط مربوط حول معصمه",
+    "Her aromanın paketinde, o aromanın renginde tulumuyla. Bir aroma seçin: koala onun paketini tutsun.": "على كيس كل نكهة، بثوب العمل بلون تلك النكهة. اختر نكهة ليحمل الكوالا كيسها.",
+    "Koalanın aroması": "نكهة الكوالا",
+    "Beşler": "Beşler",
+    "Kıtlax, Beşler Makarna'nın markasıdır.": "Kıtlax علامة تجارية لشركة Beşler Makarna.",
+    "Teknik föy isteyin": "اطلب النشرة الفنية",
+    "İçindekiler, besin değerleri ve ihracat belgeleri teknik föyde.": "المكوّنات والقيم الغذائية ووثائق التصدير موجودة في النشرة الفنية.",
+    "Marka": "العلامة التجارية",
+    "Ambalaj": "التغليف",
+    "Isıyla mühürlü poşet": "كيس مُغلق حراريًا",
+    "48 poşet · 1,92 kg net": "48 كيسًا · 1.92 كغ صافٍ",
+    "Ambalaj dili": "لغات الكيس",
+    "Türkçe · İngilizce · Arapça": "التركية · الإنجليزية · العربية",
+    "Menşe": "بلد المنشأ",
+    "Türkiye": "تركيا",
+    "Üretici": "المُنتِج",
+    "Beşsan Makarna · Beşler, Gaziantep": "Beşsan Makarna · Beşler، غازي عنتاب",
+    "Kıtlax Ketçap: burgu şekli, çeşnisiyle": "Kıtlax كاتشب: شكل اللولب مع تتبيلته",
+    "Kıtlax Peynir: kabuk şekli, çeşnisiyle": "Kıtlax جبن: شكل الصدفة مع تتبيلته",
+    "Kıtlax Süt Mısırı: rulo şekli, çeşnisiyle": "Kıtlax ذرة حلوة: شكل اللفافة مع تتبيلته",
+    "Kıtlax Acı Tako: tekerlek şekli, çeşnisiyle": "Kıtlax تاكو حار: شكل العجلة مع تتبيلته",
+    "Şekil ve aroma": "الشكل والنكهة",
+    "Ürünlerimiz": "منتجاتنا",
+    "Belgeli kalite,": "جودة موثّقة،",
+    "her pakette.": "في كل كيس.",
+    "Tesisimiz ABD Gıda ve İlaç Dairesi'ne (FDA) kayıtlı bir gıda tesisidir. Ürünlerimiz Amerika Birleşik Devletleri'ne bu kayıtla ihraç edilir.": "مصنعنا منشأة غذائية مسجّلة لدى إدارة الغذاء والدواء الأمريكية (FDA)، وتُصدَّر منتجاتنا إلى الولايات المتحدة الأمريكية بموجب هذا التسجيل.",
+    "Koşer sertifikası (OU‑D)": "شهادة الكوشر (OU‑D)",
+    "Ürünlerimiz Orthodox Union (OU) denetiminde koşer sertifikalıdır. İhracat poşetlerimizdeki OU‑D işareti, ürünün koşer olduğunu ve süt içerdiğini gösterir.": "منتجاتنا حاصلة على شهادة الكوشر تحت إشراف الاتحاد الأرثوذكسي (OU). وتدلّ علامة OU‑D على أكياس التصدير على أن المنتج كوشر ويحتوي على الحليب.",
+    "Buğdaydan pakete tek zincir": "سلسلة واحدة من القمح إلى الكيس",
+    "Hammaddemiz Beşler'in kendi zincirinden gelir: buğday irmiğe, irmik makarnaya aynı grubun tesislerinde dönüşür. Her adım tek elde, aynı standartla yürür.": "تأتي موادنا الخام من سلسلة Beşler الخاصة: يتحوّل القمح إلى سميد، والسميد إلى معكرونة، في مصانع المجموعة نفسها. كل خطوة في يد واحدة وبمعيار واحد.",
+    "Isıyla mühürlü tazelik": "نضارة محكمة الإغلاق حراريًا",
+    "Poşet dolduğu anda ısıyla mühürlenir. Çıtırlık ve aroma, paket açılana kadar ilk günkü gibi içinde kalır.": "يُغلق الكيس حراريًا لحظة امتلائه، فتبقى القرمشة والنكهة في داخله كما في يومها الأول حتى يُفتح.",
+    "Belgeler": "الوثائق",
+    "FDA kayıt belgesi": "شهادة تسجيل FDA",
+    "ABD'ye gıda ihracatı için tesis kaydı.": "تسجيل المنشأة لتصدير الأغذية إلى الولايات المتحدة.",
+    "Koşer sertifikası": "شهادة الكوشر",
+    "Ürünlerimizin koşer olduğunu belgeler; D, süt içerdiğini gösterir.": "تُثبت أن منتجاتنا كوشر؛ ويدلّ حرف D على احتوائها على الحليب.",
+    "Temsilcimiz": "كن",
+    "olun.": "ممثّلنا.",
+    "Bilgilerinizi ve mesajınızı yazın.": "اكتب بياناتك ورسالتك.",
+    "Dilerseniz aroma başına koli adedini seçin.": "اختر، إن شئت، عدد الكراتين لكل نكهة.",
+    "Mesajınız e-posta olarak hazırlanır; tek tuşla gönderin.": "تُجهَّز رسالتك كبريد إلكتروني؛ أرسلها بلمسة واحدة.",
+    "Mesaj gönder": "أرسل الرسالة",
+    "Yeni temsilcilik talebi": "طلب تمثيل جديد"
+  };
+  var DICT = { en: EN, ar: AR };
+  var RTL = { ar: true };
   var norm = function (s) { return s.replace(/\s+/g, " ").trim(); };
+  var hit = function (to, s) { var d = DICT[to]; return d ? d[norm(s)] : undefined; };
   var ATTRS = ["alt", "aria-label", "placeholder", "title"];
   var listeners = [];
   var lang = "tr";
@@ -243,7 +472,7 @@
         if (!norm(n.nodeValue)) return;
         n.__src = n.nodeValue;
       }
-      var t = to === "en" && EN[norm(n.__src)];
+      var t = hit(to, n.__src);
       if (!t) { n.nodeValue = n.__src; return; }
       var edge = n.__src.match(/^(\s*)[\s\S]*?(\s*)$/);         /* the spacing around the words stays */
       n.nodeValue = edge[1] + t + edge[2];
@@ -253,25 +482,28 @@
         if (!el.hasAttribute(a)) return;
         var k = "__src_" + a;
         if (el[k] === undefined) el[k] = el.getAttribute(a);
-        var t = to === "en" && EN[norm(el[k])];
+        var t = hit(to, el[k]);
         el.setAttribute(a, t || el[k]);
       });
     });
     if (document.__title === undefined) document.__title = document.title;
-    document.title = (to === "en" && EN[norm(document.__title)]) || document.__title;
+    document.title = hit(to, document.__title) || document.__title;
     document.documentElement.setAttribute("lang", to);
+    document.documentElement.setAttribute("dir", RTL[to] ? "rtl" : "ltr");
     document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === to)); });
     for (var i = 0; i < listeners.length; i++) listeners[i](to);
   }
   window.KX = {
-    t: function (s) { return (lang === "en" && EN[norm(s)]) || s; },
+    t: function (s) { return hit(lang, s) || s; },
     lang: function () { return lang; },
     on: function (fn) { listeners.push(fn); }
   };
   function stored() { try { return localStorage.getItem("kx-lang"); } catch (e) { return null; } }
   function store(v) { try { localStorage.setItem("kx-lang", v); } catch (e) { /* the choice holds for this visit */ } }
   function start() {
-    var first = stored() || (/^tr\b/i.test(navigator.language || "") ? "tr" : "en");
+    var nav = navigator.language || "";
+    var first = stored() || (/^tr\b/i.test(nav) ? "tr" : /^ar\b/i.test(nav) ? "ar" : "en");
+    if (first !== "tr" && !DICT[first]) first = "en";
     if (first !== "tr") apply(first);
     document.querySelectorAll("[data-lang]").forEach(function (b) {
       b.addEventListener("click", function () { var to = b.getAttribute("data-lang"); store(to); apply(to); });

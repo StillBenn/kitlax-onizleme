@@ -16,9 +16,9 @@
 <meta property="og:image" content="https://larisel.com/kitlax-onizleme/img/aroma/peynir-cesni.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="../css/site.css?v=9">
-<link rel="stylesheet" href="../css/aroma.css?v=3">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Cairo:wght@400;600;800&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../css/site.css?v=10">
+<link rel="stylesheet" href="../css/aroma.css?v=4">
 <style>:root { --c: #5a9654; --c2: #3f7a3b; --c3: #22461f; }</style>
 </head>
 <body>
@@ -27,7 +27,7 @@
 <header class="hdr">
   <a class="hdr__brand" href="../index.html" aria-label="Kıtlax — ana sayfa"><img src="../img/kitlax-logo.svg" alt="Kıtlax" width="132" height="50"></a>
   <nav class="hdr__nav" aria-label="Ana menü">
-    <a class="hdr__link" href="../index.html#aromalar">Aromalar</a>
+    <a class="hdr__link" href="../index.html#aromalar">Ürünlerimiz</a>
     <a class="hdr__link" href="#bilgi" data-optional>Ürün bilgileri</a>
     <a class="hdr__link" href="../index.html#hakkimizda" data-optional>Hakkımızda</a>
     <button class="sound" type="button" data-sound aria-pressed="true" aria-label="Ses">
@@ -36,6 +36,7 @@
     <div class="lang" role="group" aria-label="Dil">
       <button class="lang__btn" type="button" data-lang="tr" aria-pressed="true">TR</button>
       <button class="lang__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button class="lang__btn" type="button" data-lang="ar" aria-pressed="false" aria-label="العربية">AR</button>
     </div>
     <a class="hdr__cta" href="../index.html?aroma=peynir#ihracat">Distribütör olun</a>
   </nav>
@@ -61,7 +62,7 @@
     </div>
     <div class="ahero__stage" data-tilt>
       <span class="ahero__halo" aria-hidden="true"></span>
-      <img class="ahero__bag" src="../img/aroma/peynir-paket.webp" srcset="../img/aroma/peynir-paket.webp 700w, ../img/aroma/peynir-paket-hd.webp 909w" sizes="(max-width: 860px) min(62vw, 17rem), 25rem" alt="Kıtlax Peynir aromalı paket" width="909" height="1481" fetchpriority="high" style="view-transition-name: bag-peynir">
+      <img class="ahero__bag" src="../img/aroma/peynir-paket.webp?v=3" srcset="../img/aroma/peynir-paket.webp?v=3 700w, ../img/aroma/peynir-paket-hd.webp?v=3 909w" sizes="(max-width: 860px) min(62vw, 17rem), 25rem" alt="Kıtlax Peynir aromalı paket" width="909" height="1481" fetchpriority="high" style="view-transition-name: bag-peynir">
     </div>
   </section>
 
@@ -111,7 +112,7 @@
           <a class="flv__link" href="./ketcap.html" data-flavour="ketcap">
             <span class="flv__glow" aria-hidden="true"></span>
             <span class="flv__chosen" aria-hidden="true">Son baktığınız</span>
-            <img class="flv__bag" src="../img/aroma/ketcap-paket.webp" alt="Kıtlax Ketçap aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-ketcap">
+            <img class="flv__bag" src="../img/aroma/ketcap-paket.webp?v=3" alt="Kıtlax Ketçap aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-ketcap">
             <span class="flv__text"><span class="flv__name">Ketçap</span><span class="flv__meta">Burgu · 40 g</span></span>
             <span class="flv__more">Detayları incele <i aria-hidden="true">→</i></span>
           </a>
@@ -120,7 +121,7 @@
           <a class="flv__link" href="./sut.html" data-flavour="sut">
             <span class="flv__glow" aria-hidden="true"></span>
             <span class="flv__chosen" aria-hidden="true">Son baktığınız</span>
-            <img class="flv__bag" src="../img/aroma/sut-paket.webp" alt="Kıtlax Süt Mısırı aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-sut">
+            <img class="flv__bag" src="../img/aroma/sut-paket.webp?v=3" alt="Kıtlax Süt Mısırı aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-sut">
             <span class="flv__text"><span class="flv__name">Süt Mısırı</span><span class="flv__meta">Rulo · 40 g</span></span>
             <span class="flv__more">Detayları incele <i aria-hidden="true">→</i></span>
           </a>
@@ -129,7 +130,7 @@
           <a class="flv__link" href="./tako.html" data-flavour="tako">
             <span class="flv__glow" aria-hidden="true"></span>
             <span class="flv__chosen" aria-hidden="true">Son baktığınız</span>
-            <img class="flv__bag" src="../img/aroma/tako-paket.webp" alt="Kıtlax Acı Tako aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-tako">
+            <img class="flv__bag" src="../img/aroma/tako-paket.webp?v=3" alt="Kıtlax Acı Tako aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-tako">
             <span class="flv__text"><span class="flv__name">Acı Tako</span><span class="flv__meta">Tekerlek · 40 g</span></span>
             <span class="flv__more">Detayları incele <i aria-hidden="true">→</i></span>
           </a>
@@ -139,7 +140,7 @@
 </main>
 
 <nav class="mbar" aria-label="Hızlı erişim">
-  <a href="../index.html#aromalar">Aromalar</a>
+  <a href="../index.html#aromalar">Ürünlerimiz</a>
   <a href="../index.html?aroma=peynir#ihracat" class="mbar__cta">Teklif iste</a>
 </nav>
 
@@ -169,11 +170,11 @@
   <p class="foot__base"><span>© 2026 Kıtlax Makarna Cipsi</span><span>Tüm hakları saklıdır.</span></p>
 </footer>
 
-<script src="../js/i18n.js?v=7"></script>
+<script src="../js/i18n.js?v=8"></script>
 <script src="../js/home.js?v=4" defer></script>
 <script src="../js/scroll.js?v=4" defer></script>
 <script src="../js/flavours.js?v=3" defer></script>
-<script src="../js/maker.js?v=3" defer></script>
-<script src="../js/sound.js?v=5" defer></script>
+<script src="../js/maker.js?v=4" defer></script>
+<script src="../js/sound.js?v=6" defer></script>
 </body>
 </html>

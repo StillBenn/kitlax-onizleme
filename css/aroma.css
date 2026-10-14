@@ -94,3 +94,8 @@
   .ahero__bag { animation: none; transition: none; }
   .pshape__img img { transform: none; transition: none; }
 }
+
+/* ---- Arabic, right to left: the words' shade and the light behind the bag change sides ---- */
+[dir="rtl"] .ahero { background: radial-gradient(70% 80% at 28% 45%, color-mix(in srgb, var(--c) 92%, #fff) 0%, var(--c) 34%, var(--c2) 68%, var(--c3) 100%); }
+[dir="rtl"] .ahero::before { background: linear-gradient(270deg, color-mix(in srgb, var(--c3) 78%, transparent) 0%, color-mix(in srgb, var(--c3) 40%, transparent) 38%, transparent 58%); }
+

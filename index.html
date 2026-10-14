@@ -16,9 +16,9 @@
 <meta property="og:image" content="https://larisel.com/kitlax-onizleme/img/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap">
-<link rel="preload" href="./film/film.json?v=6" as="fetch" crossorigin>
-<link rel="stylesheet" href="./css/site.css?v=9">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Cairo:wght@400;600;800&family=Figtree:wght@400;500;600&display=swap">
+<link rel="preload" href="./film/film.json?v=7" as="fetch" crossorigin>
+<link rel="stylesheet" href="./css/site.css?v=10">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -50,7 +50,7 @@
 <header class="hdr">
   <a class="hdr__brand" href="#top" aria-label="Kıtlax — ana sayfa"><img src="./img/kitlax-logo.svg" alt="Kıtlax" width="132" height="50"></a>
   <nav class="hdr__nav" aria-label="Ana menü">
-    <a class="hdr__link" href="#aromalar">Aromalar</a>
+    <a class="hdr__link" href="#aromalar">Ürünlerimiz</a>
     <a class="hdr__link" href="#hakkimizda" data-optional>Hakkımızda</a>
     <a class="hdr__link" href="#iletisim" data-optional>İletişim</a>
     <button class="sound" type="button" data-sound aria-pressed="true" aria-label="Ses">
@@ -59,6 +59,7 @@
     <div class="lang" role="group" aria-label="Dil">
       <button class="lang__btn" type="button" data-lang="tr" aria-pressed="true">TR</button>
       <button class="lang__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button class="lang__btn" type="button" data-lang="ar" aria-pressed="false" aria-label="العربية">AR</button>
     </div>
     <a class="hdr__cta" href="#ihracat">Distribütör olun</a>
   </nav>
@@ -71,7 +72,7 @@
        4 crisping, 5 seasoning, 6 the bag, 7 the four bags; data-in /
        data-out: fractions of it (each chapter opens with the join from the
        one before — about its first 16 frames: no words there). -->
-  <section class="film" data-film="main" data-manifest="./film/film.json?v=6" aria-label="Kıtlax — film">
+  <section class="film" data-film="main" data-manifest="./film/film.json?v=7" aria-label="Kıtlax — film">
     <div class="film__stage">
       <picture class="film__poster">
         <source media="(orientation: portrait)" srcset="./film/poster-9x16.webp">
@@ -159,7 +160,7 @@
   <!-- ===== The four flavours ============================================ -->
   <section class="flavours" id="aromalar" aria-labelledby="aromalar-title">
     <header class="sec-head">
-      <p class="label">Aromalar</p>
+      <p class="label">Ürünlerimiz</p>
       <h2 class="sec-title" id="aromalar-title">Dört şekil, <em>dört aroma.</em></h2>
       <p class="sec-lead">Bir aromaya dokunun: tüm detaylarını görün.</p>
     </header>
@@ -168,7 +169,7 @@
         <a class="flv__link" href="./aroma/ketcap.html" data-flavour="ketcap">
           <span class="flv__glow" aria-hidden="true"></span>
           <span class="flv__chosen" aria-hidden="true">Son baktığınız</span>
-          <img class="flv__bag" src="./img/aroma/ketcap-paket.webp" alt="Kıtlax Ketçap aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-ketcap">
+          <img class="flv__bag" src="./img/aroma/ketcap-paket.webp?v=3" alt="Kıtlax Ketçap aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-ketcap">
           <span class="flv__text"><span class="flv__name">Ketçap</span><span class="flv__meta">Burgu · 40 g</span></span>
           <span class="flv__more">Detayları incele <i aria-hidden="true">→</i></span>
         </a>
@@ -177,7 +178,7 @@
         <a class="flv__link" href="./aroma/peynir.html" data-flavour="peynir">
           <span class="flv__glow" aria-hidden="true"></span>
           <span class="flv__chosen" aria-hidden="true">Son baktığınız</span>
-          <img class="flv__bag" src="./img/aroma/peynir-paket.webp" alt="Kıtlax Peynir aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-peynir">
+          <img class="flv__bag" src="./img/aroma/peynir-paket.webp?v=3" alt="Kıtlax Peynir aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-peynir">
           <span class="flv__text"><span class="flv__name">Peynir</span><span class="flv__meta">Kabuk · 40 g</span></span>
           <span class="flv__more">Detayları incele <i aria-hidden="true">→</i></span>
         </a>
@@ -186,7 +187,7 @@
         <a class="flv__link" href="./aroma/sut.html" data-flavour="sut">
           <span class="flv__glow" aria-hidden="true"></span>
           <span class="flv__chosen" aria-hidden="true">Son baktığınız</span>
-          <img class="flv__bag" src="./img/aroma/sut-paket.webp" alt="Kıtlax Süt Mısırı aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-sut">
+          <img class="flv__bag" src="./img/aroma/sut-paket.webp?v=3" alt="Kıtlax Süt Mısırı aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-sut">
           <span class="flv__text"><span class="flv__name">Süt Mısırı</span><span class="flv__meta">Rulo · 40 g</span></span>
           <span class="flv__more">Detayları incele <i aria-hidden="true">→</i></span>
         </a>
@@ -195,7 +196,7 @@
         <a class="flv__link" href="./aroma/tako.html" data-flavour="tako">
           <span class="flv__glow" aria-hidden="true"></span>
           <span class="flv__chosen" aria-hidden="true">Son baktığınız</span>
-          <img class="flv__bag" src="./img/aroma/tako-paket.webp" alt="Kıtlax Acı Tako aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-tako">
+          <img class="flv__bag" src="./img/aroma/tako-paket.webp?v=3" alt="Kıtlax Acı Tako aromalı paket" width="700" height="1140" loading="lazy" decoding="async" style="view-transition-name: bag-tako">
           <span class="flv__text"><span class="flv__name">Acı Tako</span><span class="flv__meta">Tekerlek · 40 g</span></span>
           <span class="flv__more">Detayları incele <i aria-hidden="true">→</i></span>
         </a>
@@ -223,20 +224,46 @@
       <article class="besler" aria-labelledby="besler-title">
         <img class="besler__logo" src="./img/besler-logo.webp" alt="Beşler — Yıllardır değişmeyen kalite" width="560" height="476" loading="lazy" decoding="async">
         <div class="besler__text">
-          <p class="label">Bir Beşler markası</p>
-          <h3 class="besler__title" id="besler-title">Adını beş kardeşten alan <em>bir aile.</em></h3>
+          <div class="besler__head">
+            <p class="label">Bir Beşler markası</p>
+            <h3 class="besler__title" id="besler-title">Adını beş kardeşten alan <em>bir aile.</em></h3>
+          </div>
+          <div class="besler__body">
           <p>Beşler'in Gaziantep'teki yolu bir un fabrikasıyla başladı; adı, onu kuran beş kardeşten gelir. Grup bugün undan irmiğe, irmikten makarnaya uzanan bir zincirde üretiyor.</p>
           <p>Beşler Makarna 2004'ten beri bu çatının altında. Kıtlax onun makarna cipsi: Beşler'in irmiği ve titizliği, çıtır bir atıştırmalıkta.</p>
+          </div>
         </div>
       </article>
       <div class="quality">
-        <p class="label">Kalite</p>
-        <ul class="quality__list">
-          <li><b>FDA kaydı</b><span>ABD Gıda ve İlaç Dairesi kaydıyla ihracat</span></li>
-          <li><b>Koşer (OU-D)</b><span>Her poşette koşer sertifika işareti</span></li>
-          <li><b>Durum buğdayı irmiği</b><span>Hammaddesi un değil, irmik</span></li>
-          <li><b>Üç dilli ambalaj</b><span>Türkçe, İngilizce ve Arapça: ihracata hazır</span></li>
-        </ul>
+        <div class="quality__main">
+          <p class="label">Kalite</p>
+          <h3 class="quality__title">Belgeli kalite, <em>her pakette.</em></h3>
+          <ul class="quality__list">
+            <li><b>FDA kaydı</b><span>Tesisimiz ABD Gıda ve İlaç Dairesi'ne (FDA) kayıtlı bir gıda tesisidir. Ürünlerimiz Amerika Birleşik Devletleri'ne bu kayıtla ihraç edilir.</span></li>
+            <li><b>Koşer sertifikası (OU‑D)</b><span>Ürünlerimiz Orthodox Union (OU) denetiminde koşer sertifikalıdır. İhracat poşetlerimizdeki OU‑D işareti, ürünün koşer olduğunu ve süt içerdiğini gösterir.</span></li>
+            <li><b>Buğdaydan pakete tek zincir</b><span>Hammaddemiz Beşler'in kendi zincirinden gelir: buğday irmiğe, irmik makarnaya aynı grubun tesislerinde dönüşür. Her adım tek elde, aynı standartla yürür.</span></li>
+            <li><b>Isıyla mühürlü tazelik</b><span>Poşet dolduğu anda ısıyla mühürlenir. Çıtırlık ve aroma, paket açılana kadar ilk günkü gibi içinde kalır.</span></li>
+          </ul>
+        </div>
+        <div class="certs">
+          <p class="label">Belgeler</p>
+          <article class="cert">
+            <span class="cert__mark cert__mark--fda" aria-hidden="true">FDA</span>
+            <div class="cert__text">
+              <h4 class="cert__title">FDA kayıt belgesi</h4>
+              <p class="cert__by" lang="en">U.S. Food and Drug Administration</p>
+              <p>ABD'ye gıda ihracatı için tesis kaydı.</p>
+            </div>
+          </article>
+          <article class="cert">
+            <span class="cert__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="27" cy="32" r="19" fill="none" stroke="currentColor" stroke-width="4.2"/><path d="M19.5 22.5v11a7.5 7.5 0 0 0 15 0v-11" fill="none" stroke="currentColor" stroke-width="4.6" stroke-linecap="square"/><text x="53" y="40.5" text-anchor="middle" font-family="Figtree, Segoe UI, sans-serif" font-weight="800" font-size="20" fill="currentColor">D</text></svg></span>
+            <div class="cert__text">
+              <h4 class="cert__title">Koşer sertifikası</h4>
+              <p class="cert__by" lang="en">Orthodox Union · OU‑D</p>
+              <p>Ürünlerimizin koşer olduğunu belgeler; D, süt içerdiğini gösterir.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -272,13 +299,13 @@
   <section class="trade" id="ihracat" aria-labelledby="ihracat-title">
     <div class="trade__text">
       <p class="label">İhracat ve distribütörlük</p>
-      <h2 class="sec-title" id="ihracat-title">Kıtlax'ı <em>ülkenize getirin.</em></h2>
+      <h2 class="sec-title" id="ihracat-title">Temsilcimiz <em>olun.</em></h2>
       <p>Bölgenizde Kıtlax satmak için bize yazın. Aroma karışımına ve koli adedine göre teklif hazırlayalım.</p>
       <p class="trade__note">Koli: 40 g × 48 paket.</p>
       <ul class="trade__how">
-        <li><b>1</b><span>Aroma başına koli adedini seçin.</span></li>
-        <li><b>2</b><span>Bilgilerinizi yazın.</span></li>
-        <li><b>3</b><span>Talebiniz e-posta olarak hazırlanır; tek tuşla gönderin.</span></li>
+        <li><b>1</b><span>Bilgilerinizi ve mesajınızı yazın.</span></li>
+        <li><b>2</b><span>Dilerseniz aroma başına koli adedini seçin.</span></li>
+        <li><b>3</b><span>Mesajınız e-posta olarak hazırlanır; tek tuşla gönderin.</span></li>
       </ul>
     </div>
     <form class="form" data-trade novalidate>
@@ -290,6 +317,7 @@
         <label class="field"><span>Ülke / şehir</span><input id="f-place" name="place" autocomplete="country-name" required></label>
         <label class="field"><span>E-posta veya telefon</span><input id="f-reach" name="reach" required></label>
       </div>
+      <label class="field"><span>Mesajınız</span><textarea id="f-msg" name="msg" rows="4" placeholder="Tahmini adet, teslim yeri, sorularınız"></textarea></label>
       <fieldset class="field calc" data-calc>
         <legend>Aroma başına koli</legend>
         <div class="calc__rows">
@@ -333,10 +361,8 @@
         </div>
         <p class="calc__note">1 koli = 48 paket × 40 g = 1,92 kg net.</p>
       </fieldset>
-      <label class="field"><span>Mesajınız</span><textarea id="f-msg" name="msg" rows="4" placeholder="Tahmini adet, teslim yeri, sorularınız"></textarea></label>
       <div class="form__send">
-        <button class="btn btn--solid" type="submit">Teklif isteyin</button>
-        <button class="btn btn--ghost" type="button" data-copy>Talebi kopyala</button>
+        <button class="btn btn--solid" type="submit">Mesaj gönder</button>
         <p class="form__hint" aria-live="polite"></p>
       </div>
     </form>
@@ -345,7 +371,7 @@
 </main>
 
 <nav class="mbar" aria-label="Hızlı erişim">
-  <a href="#aromalar">Aromalar</a>
+  <a href="#aromalar">Ürünlerimiz</a>
   <a href="#ihracat" class="mbar__cta">Teklif iste</a>
 </nav>
 
@@ -375,13 +401,13 @@
   <p class="foot__base"><span>© 2026 Kıtlax Makarna Cipsi</span><span>Tüm hakları saklıdır.</span></p>
 </footer>
 
-<script src="./js/i18n.js?v=7"></script>
+<script src="./js/i18n.js?v=8"></script>
 <script src="./js/home.js?v=4" defer></script>
 <script src="./js/scroll.js?v=4" defer></script>
-<script src="./js/trade.js?v=3" defer></script>
+<script src="./js/trade.js?v=4" defer></script>
 <script src="./js/flavours.js?v=3" defer></script>
-<script src="./js/maker.js?v=3" defer></script>
+<script src="./js/maker.js?v=4" defer></script>
 <script type="module" src="./js/film.js?v=7"></script>
-<script src="./js/sound.js?v=5" defer></script>
+<script src="./js/sound.js?v=6" defer></script>
 </body>
 </html>

@@ -16,11 +16,11 @@
   var fine = matchMedia("(pointer: fine)").matches;
 
   /* ---- figures, counted in ---- */
-  /* thousands grouped the reader's way: 37.960 in Turkish, 37,960 in English */
+  /* thousands grouped the reader's way: 37.960 in Turkish, 37,960 in English and Arabic */
   function fmtOf(el) {
     var group = el.hasAttribute("data-sep");
     return function (v) {
-      var s = String(Math.round(v)), sep = window.KX && window.KX.lang() === "en" ? "," : ".";
+      var s = String(Math.round(v)), sep = window.KX && window.KX.lang() !== "tr" ? "," : ".";
       return group ? s.replace(/\B(?=(\d{3})+(?!\d))/g, sep) : s;
     };
   }
