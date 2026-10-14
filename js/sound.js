@@ -16,7 +16,8 @@
               scroll is the film's clock, so an event fires when the reader
               scrolls past its moment (forward only, never on a jump):
        wheat  : the air moving round the ear; a soft tick as the grain falls
-       semolina : grains running — sparse, fine, never a hiss
+       mill   : the rollers' low hum; a crack as the grain goes in; semolina
+                running out — sparse, fine, never a hiss
        die    : the press's low hum; the knife's ring as it cuts; the wheel's
                 rush past the lens
        fryer  : bubbles rising in the oil
@@ -216,14 +217,15 @@
   /* moments of the film, as (chapter, position in it): fired once each as the reader
      scrolls past them going forward */
   var MOMENTS = [
-    { ch: 0, at: 0.70, fn: function (t) { tone(t, 1480, 0.5, 0.02, layers.fx); swell(t + 0.02, 1.1, 900, 0.03, layers.fx); } },   /* the grain comes free */
+    { ch: 0, at: 0.74, fn: function (t) { tone(t, 1480, 0.5, 0.02, layers.fx); swell(t + 0.02, 1.1, 900, 0.03, layers.fx); } },   /* the grain comes free */
+    { ch: 1, at: 0.44, fn: function (t) { burst(t, 0.05, 900, 3, 0.05, layers.fx); burst(t + 0.02, 0.08, 2600, 2, 0.025, layers.fx); swell(t + 0.05, 1.3, 1800, 0.03, layers.fx); } },   /* the grain goes between the rollers */
     { ch: 2, at: 0.66, fn: function (t) { ring(t, 0.05, layers.fx); } },                 /* the knife cuts */
     { ch: 2, at: 0.85, fn: function (t) { swell(t, 1.4, 700, 0.07, layers.fx); } },       /* the wheel rushes at the lens */
     { ch: 4, at: 0.31, fn: function (t) { swell(t, 1.2, 1600, 0.035, layers.fx); burst(t + 0.1, 0.25, 900, 0.8, 0.02, layers.fx); } },   /* the powder lands */
     { ch: 4, at: 0.91, fn: function (t) { swell(t, 0.9, 900, 0.04, layers.fx); } },       /* the wheel drops away */
-    { ch: 5, at: 0.48, fn: function (t) { burst(t, 0.04, 1500, 4, 0.05, layers.fx); burst(t + 0.015, 0.06, 3000, 2, 0.02, layers.fx); } },   /* it lands on the heap */
-    { ch: 5, at: 0.65, fn: function (t) { swell(t, 1.1, 420, 0.035, layers.fx); } },      /* the jaws come down */
-    { ch: 5, at: 0.84, fn: function (t) { seal(t, 0.09, layers.fx); } },                  /* the jaws close */
+    { ch: 5, at: 0.46, fn: function (t) { burst(t, 0.04, 1500, 4, 0.05, layers.fx); burst(t + 0.015, 0.06, 3000, 2, 0.02, layers.fx); } },   /* it lands on the heap */
+    { ch: 5, at: 0.63, fn: function (t) { swell(t, 1.1, 420, 0.035, layers.fx); } },      /* the jaws come down */
+    { ch: 5, at: 0.81, fn: function (t) { seal(t, 0.09, layers.fx); } },                  /* the jaws close */
     { ch: 6, at: 0.72, fn: function (t) { tone(t, 1174.7, 1.6, 0.03, layers.fx); tone(t + 0.14, 1760, 1.8, 0.022, layers.fx); } }   /* the family */
   ];
   var lastPos = -1, lastMix = 0;
@@ -237,15 +239,15 @@
     if (pos && past < 1) {
       var k = 1 - past, c = pos.ch, l = pos.local;
       if (c === 0) w.air = 0.8 * k;
-      else if (c === 1) w.grains = (l < 0.12 ? l / 0.12 : 1) * k;
+      else if (c === 1) { w.hum = (l < 0.2 ? l / 0.2 : 1) * 0.7 * k; w.grains = (l > 0.42 ? 1 : 0) * k; }   /* the rollers turning; semolina pouring out */
       else if (c === 2) w.hum = (l < 0.15 ? l / 0.15 : 1) * 0.9 * k;
       else if (c === 3) { w.bubbles = (l < 0.15 ? l / 0.15 : 1) * k; w.hum = l < 0.12 ? (1 - l / 0.12) * 0.5 * k : 0; }
       else if (c === 4) w.shimmer = (l > 0.12 && l < 0.85 ? 1 : 0.3) * k;
-      else if (c === 5) w.landing = (l > 0.24 && l < 0.68 ? 1 : 0) * k;   /* the wheels landing on the heap in the bag */
+      else if (c === 5) w.landing = (l > 0.22 && l < 0.65 ? 1 : 0) * k;   /* the wheels landing on the heap in the bag */
       else if (c === 6) w.music = 0.85 + 0.15 * l;
       /* the moments: crossed going forward, by a reader moving at a reading pace */
       var p = c + l;
-      if (lastPos >= 0 && p > lastPos && p - lastPos < 0.25) {
+      if (lastPos >= 0 && p > lastPos && p - lastPos < 0.25 && !(pos.lag > 6)) {   /* a jump passes through, it does not play them */
         MOMENTS.forEach(function (m) { var mp = m.ch + m.at; if (lastPos < mp && p >= mp) m.fn(t + 0.01); });
       }
       lastPos = p;
@@ -317,9 +319,19 @@
     if (!ctx || !on) return;
     if (document.hidden) ctx.suspend(); else { ctx.resume(); if (nextBar < ctx.currentTime) nextBar = ctx.currentTime + 0.3; }
   });
+  /* small sounds the page asks for: a card met by the pointer, a case added, a request sent */
+  document.addEventListener("kx:sfx", function (e) {
+    if (!on || !ctx) return;
+    var t = ctx.currentTime;
+    if (e.detail === "hover") { tone(t, 2093, 0.25, 0.006, layers.ui); tone(t + 0.03, 3136, 0.2, 0.003, layers.ui); }
+    else if (e.detail === "tick") { burst(t, 0.02, 3200, 1.6, 0.06, layers.ui); tone(t, 1760, 0.06, 0.02, layers.ui); }
+    else if (e.detail === "send") { tone(t, 1318.5, 0.9, 0.06, layers.ui); tone(t + 0.12, 1975.5, 1.1, 0.05, layers.ui); }
+  });
+
   /* the hand: a soft tick on choices */
   document.addEventListener("click", function (e) {
     if (!on || !ctx) return;
+    if (e.target.closest("[data-step], [type=submit], [data-copy]")) return;   /* those make their own sound (kx:sfx) */
     if (e.target.closest(".lang__btn, .hdr__link, .hdr__cta, button, a")) {
       var t = ctx.currentTime; burst(t, 0.025, 3600, 1.4, 0.08, layers.ui); tone(t, 1600, 0.07, 0.03, layers.ui);
     }

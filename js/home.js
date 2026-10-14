@@ -31,6 +31,19 @@
   window.FilmIntro = { progress: paint, done: lift };
   setTimeout(lift, 12000);           /* never trapped behind the curtain */
 
+  /* arriving at index.html#part: the browser scrolls to the part before the film has grown to its real
+     length (that needs its manifest), and the part is pushed far down — follow it until the reader moves */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  var hashEl = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (hashEl) {
+    var moved = false;
+    ["wheel", "touchstart", "keydown", "pointerdown"].forEach(function (t) { addEventListener(t, function () { moved = true; }, { once: true, passive: true }); });
+    var settle = function () { if (!moved) window.scrollTo(0, hashEl.getBoundingClientRect().top + scrollY); };
+    addEventListener("film:layout", function (e) { if (e.detail && e.detail.id === "main") settle(); });
+    addEventListener("load", settle);
+    setTimeout(function () { moved = true; }, 6000);
+  }
+
   /* the reader has taken over */
   addEventListener("scroll", function once() {
     if (scrollY > 12) { html.classList.add("has-scrolled"); removeEventListener("scroll", once); }
@@ -49,12 +62,12 @@
 
   /* words arrive, part after part */
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var groups = [].slice.call(document.querySelectorAll(".sec-head, .flv-list, .maker__text, .figures, .koala__text, .koala__img, .trade__text, .form"));
+  var groups = [].slice.call(document.querySelectorAll(".sec-head, .flv-list, .step-list, .maker__text, .figures, .maker__grid, .koala__text, .koala__stage, .trade__text, .form, .made__step, .pfacts__list"));
   if (!reduced && "IntersectionObserver" in window && groups.length) {
     html.classList.add("rv");
     groups.forEach(function (g) {
-      /* an image rises as one; a block rises child after child */
-      var parts = g.matches("img") ? [g] : [].slice.call(g.children);
+      /* an image, a picture's stage or one step rises as one; a block rises child after child */
+      var parts = g.matches("img, .koala__stage, .made__step") ? [g] : [].slice.call(g.children);
       parts.forEach(function (el, i) { el.classList.add("rv__p"); el.style.setProperty("--i", Math.min(i, 8)); });
     });
     var io = new IntersectionObserver(function (es) {

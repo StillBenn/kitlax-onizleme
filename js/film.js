@@ -823,7 +823,9 @@ export async function mountFilm(root, primary = true) {
     const ka = chOf(a), kb = chOf(b);
     const c = chapters[ka];
     const local = (shown - c.first) / Math.max(1, c.count - 1);
-    if (primary) window.__filmPos = { ch: ka, local };          /* where the reader is, for anything that follows the film */
+    /* where the reader is, for anything that follows the film; lag: frames the picture is still behind the
+       scroll (a jump makes it large — the sound skips the moments it is only passing through) */
+    if (primary) window.__filmPos = { ch: ka, local, lag: Math.abs(target - shown) };
     wanted = new Set([ka, kb]);
     if (local > 0.5 || (local > 0.25 && renderer.atlases.has(ka + 1))) wanted.add(ka + 1);
     if (local < 0.5 || (local < 0.75 && renderer.atlases.has(ka - 1))) wanted.add(ka - 1);
