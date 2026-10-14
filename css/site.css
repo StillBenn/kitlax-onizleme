@@ -268,14 +268,18 @@ section:not(.film) { position: relative; z-index: 1; padding: clamp(4.5rem, 3rem
 
 /* the koala, dressed in each flavour's colour */
 .koala { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); gap: clamp(1.5rem, 1rem + 4vw, 5rem); align-items: center; background: var(--cream-2); }
-/* (left 3.5%: the bag hangs out past the artwork's left edge; the pair is centred, not the koala alone) */
-.koala__stage { position: relative; left: 3.5%; width: min(90%, 26rem); justify-self: center; transform: translate3d(var(--kx, 0px), var(--ky, 0px), 0); transition: transform 900ms var(--e-out); }
-.koala__img, .koala__paint { display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(60, 30, 10, 0.22)); }
+/* (left 2%: the bag hangs out past the artwork's left edge; the pair is centred, not the koala alone) */
+.koala__stage { position: relative; left: 2%; width: min(90%, 26rem); justify-self: center; transform: translate3d(var(--kx, 0px), var(--ky, 0px), 0); transition: transform 900ms var(--e-out); }
+/* standing on the floor, not floating: a soft contact shadow under the feet, and only a light shadow
+   of the figure on the wall behind (a wide drop shadow alone read as a cut-out with a halo) */
+.koala__stage::before { content: ""; position: absolute; z-index: -1; left: 22%; right: 20%; top: 95.4%; height: 6.6%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(60, 30, 10, 0.5), rgba(60, 30, 10, 0.2) 50%, transparent); filter: blur(2px); }
+.koala__img, .koala__paint { display: block; width: 100%; height: auto; filter: drop-shadow(14px 22px 26px rgba(60, 30, 10, 0.13)); }
 .koala__paint { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity 500ms var(--e-out); pointer-events: none; filter: none; }
 .koala__paint.is-on { opacity: 1; }
-/* boxes from tools/koala_hold.py, as shares of the artwork; the bag swings about the grip (45% 5% of its box) */
-.koala__hold { position: absolute; left: -6.968%; top: 45.473%; width: 34.204%; aspect-ratio: 299 / 497; pointer-events: none;
-  transform-origin: 44.9% 5.1%; filter: drop-shadow(10px 16px 14px rgba(60, 30, 10, 0.22)); }
+/* boxes from tools/koala_hold.py, as shares of the artwork; the bag swings about the grip (the peak of its roof, 47% 1.5% of its box) */
+.koala__hold { position: absolute; left: -4.196%; top: 46.091%; width: 27.197%; aspect-ratio: 238 / 400; pointer-events: none;
+  transform-origin: 46.7% 1.5%; filter: drop-shadow(10px 16px 14px rgba(60, 30, 10, 0.22)); }
 .koala__hold img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 420ms var(--e-out); }
 .koala__hold img.is-on { opacity: 1; }
 .koala__hold.is-swinging { animation: koala-swing 1500ms cubic-bezier(0.3, 0.6, 0.4, 1); }
