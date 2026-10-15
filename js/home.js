@@ -80,4 +80,15 @@
     groups.forEach(function (g) { io.observe(g); });
   }
 
+  /* "Skip the film": its ring fills with the film behind you */
+  var skip = document.querySelector(".film__skip"), filmEl = skip && skip.closest(".film");
+  if (skip && filmEl) {
+    var ring = function () {
+      var r = filmEl.getBoundingClientRect(), len = r.height - innerHeight;
+      skip.style.setProperty("--skip-p", (len > 0 ? Math.min(1, Math.max(0, -r.top / len)) : 0).toFixed(3));
+    };
+    addEventListener("scroll", ring, { passive: true });
+    addEventListener("resize", ring);
+    ring();
+  }
 })();
