@@ -396,7 +396,11 @@ section:not(.film) { position: relative; z-index: 1; padding: clamp(4.5rem, 3rem
 .foot .label { color: rgba(247, 239, 228, 0.5); margin-bottom: 0.9rem; }
 .foot__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
 .foot a:hover { color: var(--ivory); }
-.foot__base { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(247, 239, 228, 0.1); font-size: 0.85rem; color: rgba(247, 239, 228, 0.5); }
+.foot__base { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem 1rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(247, 239, 228, 0.1); font-size: 0.85rem; color: rgba(247, 239, 228, 0.5); }
+.foot__rights, .foot__credit { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.35em; }
+.foot__rights > span + span::before { content: "·"; margin-inline-end: 0.35em; }
+.foot__credit a { color: rgba(247, 239, 228, 0.82); font-weight: 600; text-decoration: none; transition: color 0.2s ease; }
+.foot__credit a:hover, .foot__credit a:focus-visible { color: var(--ivory); }
 @media (max-width: 760px) { .foot__grid { grid-template-columns: 1fr; } }
 
 /* ---- words arrive once, part after part (js/home.js adds html.rv) ---------------- */
