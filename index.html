@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Cairo:wght@400;600;800&family=Figtree:wght@400;500;600&display=swap">
 <link rel="preload" href="./film/film.json?v=7" as="fetch" crossorigin>
-<link rel="stylesheet" href="./css/site.css?v=13">
+<link rel="stylesheet" href="./css/site.css?v=14">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -248,19 +248,29 @@
         <div class="certs">
           <p class="label">Belgeler</p>
           <article class="cert">
-            <span class="cert__mark cert__mark--fda" aria-hidden="true">FDA</span>
-            <div class="cert__text">
-              <h4 class="cert__title">FDA kayıt belgesi</h4>
-              <p class="cert__by" lang="en">U.S. FDA · Registrar Corp</p>
-              <p>ABD'ye gıda ihracatı için tesis kaydı.</p>
+            <div class="cert__in">
+              <button class="cert__doc" type="button" data-doc="./img/belgeler/fda-kayit.webp" data-w="927" data-h="1197" aria-label="FDA kayıt belgesini büyüt">
+                <img src="./img/belgeler/fda-kayit-k.webp" alt="" width="434" height="560" loading="lazy" decoding="async">
+                <span class="cert__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.2 15.2 20 20M10.5 7.9v5.2M7.9 10.5h5.2"/></svg></span>
+              </button>
+              <div class="cert__text">
+                <h4 class="cert__title">FDA kayıt belgesi</h4>
+                <p class="cert__by" lang="en">U.S. FDA · Registrar Corp</p>
+                <p>ABD'ye gıda ihracatı için tesis kaydı.</p>
+              </div>
             </div>
           </article>
-          <article class="cert">
-            <span class="cert__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="27" cy="32" r="19" fill="none" stroke="currentColor" stroke-width="4.2"/><path d="M19.5 22.5v11a7.5 7.5 0 0 0 15 0v-11" fill="none" stroke="currentColor" stroke-width="4.6" stroke-linecap="square"/><text x="53" y="40.5" text-anchor="middle" font-family="Figtree, Segoe UI, sans-serif" font-weight="800" font-size="20" fill="currentColor">D</text></svg></span>
-            <div class="cert__text">
-              <h4 class="cert__title">Koşer sertifikası</h4>
-              <p class="cert__by" lang="en">Orthodox Union · OU‑D</p>
-              <p>Ürünlerimizin koşer olduğunu belgeler; D, süt ürünü sınıfını gösterir.</p>
+          <article class="cert cert--wide">
+            <div class="cert__in">
+              <button class="cert__doc" type="button" data-doc="./img/belgeler/koser-ou.webp" data-w="1552" data-h="1200" aria-label="Koşer sertifikasını büyüt">
+                <img src="./img/belgeler/koser-ou-k.webp" alt="" width="720" height="557" loading="lazy" decoding="async">
+                <span class="cert__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.2 15.2 20 20M10.5 7.9v5.2M7.9 10.5h5.2"/></svg></span>
+              </button>
+              <div class="cert__text">
+                <h4 class="cert__title">Koşer sertifikası</h4>
+                <p class="cert__by" lang="en">Orthodox Union · OU‑D</p>
+                <p>Ürünlerimizin koşer olduğunu belgeler; D, süt ürünü sınıfını gösterir.</p>
+              </div>
             </div>
           </article>
         </div>
@@ -401,8 +411,19 @@
   <p class="foot__base"><span class="foot__rights"><span>© 2026 Kıtlax Makarna Cipsi</span><span>Tüm hakları saklıdır.</span></span><span class="foot__credit"><span>Web Tasarım</span><a href="https://www.dolphinajans.com/" target="_blank" rel="noopener" dir="ltr">Dolphin Ajans®</a></span></p>
 </footer>
 
-<script src="./js/i18n.js?v=10"></script>
-<script src="./js/home.js?v=4" defer></script>
+<!-- a document, whole: opened from its card in the quality panel -->
+<dialog class="doc" id="belge" aria-labelledby="belge-title">
+  <div class="doc__card">
+    <div class="doc__head">
+      <div><p class="doc__title" id="belge-title"></p><p class="doc__by" lang="en"></p></div>
+      <button class="doc__close" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <img class="doc__img" alt="" decoding="async">
+  </div>
+</dialog>
+
+<script src="./js/i18n.js?v=11"></script>
+<script src="./js/home.js?v=5" defer></script>
 <script src="./js/scroll.js?v=4" defer></script>
 <script src="./js/trade.js?v=4" defer></script>
 <script src="./js/flavours.js?v=3" defer></script>

@@ -79,4 +79,67 @@
     }, { rootMargin: "0px 0px -10% 0px", threshold: 0.01 });
     groups.forEach(function (g) { io.observe(g); });
   }
+
+  /* the documents: a card opens its sheet whole, fitted to the screen. A click on the sheet
+     shows it at its own size (scrolling round it, the clicked point brought to the middle);
+     Escape, the cross or the dimmed page around it closes. The card's small picture stands
+     in until the full one has arrived, at the same size, so nothing jumps. */
+  var dlg = document.getElementById("belge");
+  if (dlg && typeof dlg.showModal === "function") {
+    var card = dlg.querySelector(".doc__card"), head = dlg.querySelector(".doc__head");
+    var big = dlg.querySelector(".doc__img"), opener = null, W = 0, H = 0, zoomed = false;
+    var fit = function () {
+      var cs = getComputedStyle(dlg);
+      var aw = dlg.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var ah = dlg.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - head.offsetHeight - 15;
+      var k = zoomed ? 1 : Math.min(1, aw / W, ah / H);
+      var w = Math.round(W * k), h = Math.round(H * k);
+      big.style.width = w + "px"; big.style.height = h + "px";
+      card.style.width = Math.max(w, Math.min(aw, 320)) + "px";
+    };
+    var shut = function () {
+      if (!dlg.open || dlg.classList.contains("is-closing")) return;
+      dlg.classList.add("is-closing");
+      setTimeout(function () {
+        dlg.classList.remove("is-closing", "is-zoomed");
+        dlg.close();
+      }, reduced ? 0 : 190);
+    };
+    dlg.addEventListener("close", function () {
+      html.classList.remove("has-modal");
+      big.removeAttribute("src");
+      if (opener) opener.focus({ preventScroll: true });
+    });
+    dlg.addEventListener("cancel", function (e) { e.preventDefault(); shut(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) shut(); });
+    dlg.querySelector(".doc__close").addEventListener("click", shut);
+    big.addEventListener("click", function (e) {
+      var r = big.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+      zoomed = !zoomed;
+      dlg.classList.toggle("is-zoomed", zoomed);
+      fit();
+      var n = big.getBoundingClientRect();
+      dlg.scrollLeft += n.left + fx * n.width - dlg.clientWidth / 2;
+      dlg.scrollTop += n.top + fy * n.height - dlg.clientHeight / 2;
+    });
+    addEventListener("resize", function () { if (dlg.open) fit(); });
+    [].forEach.call(document.querySelectorAll(".cert__doc"), function (b) {
+      b.addEventListener("click", function () {
+        var c = b.closest(".cert"), thumb = b.querySelector("img");
+        opener = b; zoomed = false;
+        W = +b.dataset.w; H = +b.dataset.h;
+        dlg.querySelector(".doc__title").textContent = c.querySelector(".cert__title").textContent;
+        dlg.querySelector(".doc__by").textContent = c.querySelector(".cert__by").textContent;
+        big.alt = c.querySelector(".cert__title").textContent;
+        big.src = thumb.currentSrc || thumb.src;
+        var full = new Image();
+        full.onload = function () { if (dlg.open && opener === b) big.src = full.src; };
+        full.src = b.dataset.doc;
+        html.classList.add("has-modal");
+        dlg.showModal();
+        dlg.scrollTop = 0; dlg.scrollLeft = 0;
+        fit();
+      });
+    });
+  }
 })();

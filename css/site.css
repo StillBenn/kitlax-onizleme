@@ -274,12 +274,35 @@ section:not(.film) { position: relative; z-index: 1; padding: clamp(4.5rem, 3rem
 /* the documents: two sheets of paper on the night panel */
 .certs { display: grid; gap: 0.9rem; align-content: start; }
 .certs .label { margin-bottom: 0.2rem; }
-.cert { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.1rem; align-items: start; padding: 1.25rem 1.3rem 1.3rem;
-  background: var(--ivory); color: var(--ink); border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(29, 20, 14, 0.06), 0 22px 44px -26px rgba(0, 0, 0, 0.7); }
-.cert__mark { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--cream); color: var(--ink);
-  box-shadow: inset 0 0 0 1px rgba(29, 20, 14, 0.12); }
-.cert__mark svg { width: 2.6rem; height: 2.6rem; }
-.cert__mark--fda { font: 800 0.95rem/1 var(--f-display); letter-spacing: 0.02em; }
+.cert { container-type: inline-size; padding: 0.9rem; background: var(--ivory); color: var(--ink); border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(29, 20, 14, 0.06), 0 22px 44px -26px rgba(0, 0, 0, 0.7); }
+.cert__in { display: grid; gap: 1rem; }
+/* the document itself, on a cream mat: a sheet laid down a touch askew, straightened when pointed at */
+.cert__doc { position: relative; display: grid; place-items: center; height: 12.5rem; padding: 1.1rem; border: 0; border-radius: 11px;
+  background: radial-gradient(120% 95% at 50% 38%, #f8f1e6 0%, var(--cream-2) 100%); box-shadow: inset 0 0 0 1px rgba(29, 20, 14, 0.07);
+  cursor: zoom-in; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+.cert__doc img { max-width: 100%; max-height: calc(12.5rem - 2.2rem); width: auto; height: auto; border-radius: 2px; background: #fff; transform: rotate(-1.6deg);
+  box-shadow: 0 1px 2px rgba(29, 20, 14, 0.22), 0 12px 22px -12px rgba(29, 20, 14, 0.55);
+  transition: transform 520ms var(--e-out), box-shadow 520ms var(--e-out); }
+.cert--wide .cert__doc img { transform: rotate(1.2deg); }
+.cert__doc:hover img, .cert__doc:focus-visible img { transform: translateY(-2px) scale(1.035);
+  box-shadow: 0 1px 2px rgba(29, 20, 14, 0.2), 0 20px 30px -14px rgba(29, 20, 14, 0.6); }
+.cert__doc:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.cert__zoom { position: absolute; inset-inline-end: 0.5rem; bottom: 0.5rem; display: grid; place-items: center; width: 1.9rem; height: 1.9rem;
+  border-radius: 50%; background: var(--ink); color: var(--ivory); box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.5);
+  opacity: 0; transform: scale(0.82); transition: opacity 260ms var(--e-out), transform 360ms var(--e-out); }
+.cert__zoom svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.cert__doc:hover .cert__zoom, .cert__doc:focus-visible .cert__zoom { opacity: 1; transform: none; }
+@media (hover: none) { .cert__zoom { opacity: 0.92; transform: none; } }
+.cert__text { padding: 0 0.35rem 0.35rem; }
+/* wide enough for both: the document beside its words */
+@container (min-width: 19rem) {
+  /* the mat's size, written out: a percentage max-height inside a box sized by aspect-ratio is ignored */
+  .cert__in { --mat: clamp(6.8rem, 34cqi, 10.5rem); grid-template-columns: var(--mat) minmax(0, 1fr); gap: 1.15rem; align-items: center; }
+  .cert__doc { height: calc(var(--mat) * 0.9); padding: 0.75rem; }
+  .cert__doc img { max-width: calc(var(--mat) - 1.5rem); max-height: calc(var(--mat) * 0.9 - 1.5rem); }
+  .cert__text { padding: 0 0.3rem 0 0; }
+}
 .cert__title { margin: 0; font: 800 1.12rem/1.2 var(--f-display); letter-spacing: -0.01em; }
 .cert__by { margin-top: 0.35rem; font: 600 0.72rem/1.35 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
 .cert__text > p:not(.cert__by) { margin-top: 0.55rem; font-size: 0.93rem; line-height: 1.55; color: var(--ink-soft); }
@@ -297,6 +320,33 @@ section:not(.film) { position: relative; z-index: 1; padding: clamp(4.5rem, 3rem
   }
 }
 @media (max-width: 720px) { .quality__list, .certs { grid-template-columns: 1fr; } }
+/* a document, whole: over a dimmed page, fitted to the screen; a click on it shows it at its own size */
+html.has-modal { overflow: hidden; scrollbar-gutter: stable; }
+.doc { width: 100%; max-width: 100%; height: 100%; max-height: 100%; margin: 0; padding: clamp(0.8rem, 0.4rem + 2vw, 2.4rem);
+  border: 0; background: transparent; color: var(--ivory); overflow: auto; overscroll-behavior: contain; }
+.doc[open] { display: grid; }
+.doc::backdrop { background: rgba(20, 13, 9, 0.8); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.doc__card { margin: auto; display: grid; gap: 0.9rem; }
+.doc__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.doc__title { font: 800 1.15rem/1.2 var(--f-display); letter-spacing: -0.01em; }
+.doc__by { margin-top: 0.3rem; font: 600 0.7rem/1.3 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(247, 239, 228, 0.6); }
+.doc__close { flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border: 0; border-radius: 50%;
+  background: rgba(247, 239, 228, 0.12); color: var(--ivory); cursor: pointer; transition: background 200ms var(--e-out); }
+.doc__close:hover { background: rgba(247, 239, 228, 0.24); }
+.doc__close:focus-visible { outline: 2px solid var(--ivory); outline-offset: 2px; }
+.doc__close svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.doc__img { display: block; max-width: none; border-radius: 4px; background: #fff; cursor: zoom-in; box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85); }
+.doc.is-zoomed .doc__img { cursor: zoom-out; }
+@media (prefers-reduced-motion: no-preference) {
+  .doc[open] .doc__card { animation: doc-in 460ms var(--e-out); }
+  .doc[open]::backdrop { animation: doc-fade 320ms ease-out; }
+  .doc.is-closing .doc__card { animation: doc-out 190ms ease-in forwards; }
+  .doc.is-closing::backdrop { animation: doc-fade-out 190ms ease-in forwards; }
+}
+@keyframes doc-in { from { opacity: 0; transform: translateY(16px) scale(0.97); } }
+@keyframes doc-out { to { opacity: 0; transform: translateY(8px) scale(0.985); } }
+@keyframes doc-fade { from { opacity: 0; } }
+@keyframes doc-fade-out { to { opacity: 0; } }
 @media (max-width: 960px) { .maker__top { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .besler { grid-template-columns: 1fr; justify-items: start; } .besler__logo { width: 7rem; } }
 
