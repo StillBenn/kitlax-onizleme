@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Cairo:wght@400;600;800&family=Figtree:wght@400;500;600&display=swap">
 <link rel="preload" href="./film/film.json?v=7" as="fetch" crossorigin>
-<link rel="stylesheet" href="./css/site.css?v=14">
+<link rel="stylesheet" href="./css/site.css?v=18">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -240,42 +240,164 @@
           <h3 class="quality__title">Belgeli kalite, <em>her pakette.</em></h3>
           <ul class="quality__list">
             <li><b>FDA kaydı</b><span>Tesisimiz ABD Gıda ve İlaç Dairesi'ne (FDA) kayıtlı bir gıda tesisidir; bu kayıt, ABD'ye gıda ihracatı için gereklidir.</span></li>
-            <li><b>Koşer sertifikası (OU‑D)</b><span>Ürünlerimiz Orthodox Union (OU) denetiminde koşer sertifikalıdır. Poşetlerimizdeki OU‑D (Dairy) işareti, ürünün koşer olduğunu ve süt ürünü sınıfında olduğunu gösterir.</span></li>
+            <li><b>Koşer sertifikası (OU)</b><span>Kıtlax Makarna Cipsi, Orthodox Union (OU) denetiminde koşer sertifikalıdır; belgede adıyla yer alır.</span></li>
             <li><b>Buğdaydan pakete tek zincir</b><span>Hammaddemiz Beşler'in kendi zincirinden gelir: buğday irmiğe, irmik makarnaya aynı grubun tesislerinde dönüşür. Her adım tek elde, aynı standartla yürür.</span></li>
             <li><b>Isıyla mühürlü tazelik</b><span>Poşet dolduğu anda ısıyla mühürlenir. Çıtırlık ve aroma, paket açılana kadar ilk günkü gibi içinde kalır.</span></li>
           </ul>
-        </div>
-        <div class="certs">
-          <p class="label">Belgeler</p>
-          <article class="cert">
-            <div class="cert__in">
-              <button class="cert__doc" type="button" data-doc="./img/belgeler/fda-kayit.webp" data-w="927" data-h="1197" aria-label="FDA kayıt belgesini büyüt">
-                <img src="./img/belgeler/fda-kayit-k.webp" alt="" width="434" height="560" loading="lazy" decoding="async">
-                <span class="cert__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.2 15.2 20 20M10.5 7.9v5.2M7.9 10.5h5.2"/></svg></span>
-              </button>
-              <div class="cert__text">
-                <h4 class="cert__title">FDA kayıt belgesi</h4>
-                <p class="cert__by" lang="en">U.S. FDA · Registrar Corp</p>
-                <p>ABD'ye gıda ihracatı için tesis kaydı.</p>
-              </div>
-            </div>
-          </article>
-          <article class="cert cert--wide">
-            <div class="cert__in">
-              <button class="cert__doc" type="button" data-doc="./img/belgeler/koser-ou.webp" data-w="1552" data-h="1200" aria-label="Koşer sertifikasını büyüt">
-                <img src="./img/belgeler/koser-ou-k.webp" alt="" width="720" height="557" loading="lazy" decoding="async">
-                <span class="cert__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.2 15.2 20 20M10.5 7.9v5.2M7.9 10.5h5.2"/></svg></span>
-              </button>
-              <div class="cert__text">
-                <h4 class="cert__title">Koşer sertifikası</h4>
-                <p class="cert__by" lang="en">Orthodox Union · OU‑D</p>
-                <p>Ürünlerimizin koşer olduğunu belgeler; D, süt ürünü sınıfını gösterir.</p>
-              </div>
-            </div>
-          </article>
+          <a class="quality__more" href="#belgeler"><span>Belgeleri inceleyin</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ===== The papers: the plant's certificates =========================
+       Each card holds its sheet; opened, the sheet lifts off the card into a
+       viewer (js/docs.js) with what it certifies, until when, and the others
+       a swipe or an arrow away. -->
+  <section class="docs" id="belgeler" aria-labelledby="belgeler-title">
+    <header class="docs__head">
+      <div class="docs__intro">
+        <p class="label">Belgeler</p>
+        <h2 class="sec-title" id="belgeler-title">Kıtlax'ın üretildiği tesis, <em>belgeleriyle.</em></h2>
+      </div>
+      <p class="sec-lead docs__lead">Kıtlax, Beşsan Makarna'nın Gaziantep'teki tesisinde üretilir. Gıda güvenliğinden ihracata tesisin belgeleri burada: birine dokunun, aslını açın.</p>
+    </header>
+    <div class="docs__bar" role="group" aria-label="Belgeleri süz">
+      <button class="docs__chip" type="button" data-filter="all" aria-pressed="true"><span>Tümü</span><b translate="no">9</b></button>
+      <button class="docs__chip" type="button" data-filter="food" aria-pressed="false"><span>Gıda güvenliği</span><b translate="no">3</b></button>
+      <button class="docs__chip" type="button" data-filter="faith" aria-pressed="false"><span>Helal ve koşer</span><b translate="no">2</b></button>
+      <button class="docs__chip" type="button" data-filter="mgmt" aria-pressed="false"><span>Yönetim sistemleri</span><b translate="no">4</b></button>
+    </div>
+    <ul class="docs__grid">
+        <li class="dcard dcard--wide" data-id="koser" data-group="faith" style="--tilt: -1.6deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="3" data-w="2002" data-h="1547">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/koser-k.webp?v=1" alt="" width="600" height="464" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+              <span class="dcard__badge">Kıtlax adıyla</span>
+            <span class="dcard__body">
+              <span class="dcard__code">Koşer</span>
+              <span class="dcard__name">Orthodox Union koşer sertifikası</span>
+              <span class="dcard__by" translate="no">Orthodox Union (OU)</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Düzenleyen</dt><dd translate="no">Orthodox Union (OU), New York</dd></div><div><dt>Kıtlax kaydı</dt><dd translate="no">OUV3-3DOHCOH</dd></div><div><dt>Tarih</dt><dd translate="no">14.05.2026</dd></div><div><dt>Geçerlilik</dt><dd translate="no">31.05.2027</dd></div><div><dt>Kapsam</dt><dd>Kıtlax Makarna Cipsi belgede adıyla yer alır. Belge, Beşsan&#x27;ın makarna markalarını da kapsar.</dd></div></dl>
+        </li>
+        <li class="dcard" data-id="brcgs" data-group="food" style="--tilt: 1.4deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="1" data-w="1414" data-h="2000">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/brcgs-k.webp?v=1" alt="" width="440" height="622" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+              <span class="dcard__badge">A notu</span>
+            <span class="dcard__body">
+              <span class="dcard__code" translate="no">BRCGS</span>
+              <span class="dcard__name">Gıda güvenliği standardı</span>
+              <span class="dcard__by" translate="no">FoodChain ID Certification</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Düzenleyen</dt><dd translate="no">FoodChain ID Certification (UKAS 0214)</dd></div><div><dt>Not</dt><dd translate="no">A</dd></div><div><dt>Denetim</dt><dd translate="no">13–15.01.2026</dd></div><div><dt>Tarih</dt><dd translate="no">21.02.2026</dd></div><div><dt>Geçerlilik</dt><dd translate="no">04.03.2027</dd></div><div><dt>Kapsam</dt><dd>İrmiğin ve kuru makarna ürünlerinin hazırlanması, şekillendirilmesi, kurutulması ve paketlenmesi (BRCGS Issue 9).</dd></div></dl>
+        </li>
+        <li class="dcard" data-id="fda" data-group="food" style="--tilt: -1.2deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="1" data-w="828" data-h="1170">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/fda-k.webp?v=1" alt="" width="440" height="622" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+            <span class="dcard__body">
+              <span class="dcard__code" translate="no">FDA</span>
+              <span class="dcard__name">Gıda tesisi kaydı</span>
+              <span class="dcard__by" translate="no">U.S. Food and Drug Administration</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Kayıt no</dt><dd translate="no">14934701570</dd></div><div><dt>Durum</dt><dd>Geçerli</dd></div><div><dt>Tarih</dt><dd translate="no">01.10.2026</dd></div><div><dt>Geçerlilik</dt><dd translate="no">31.12.2028</dd></div><div><dt>Kapsam</dt><dd>Tesisin ABD Gıda ve İlaç Dairesi (FDA) kaydını doğrulayan yazı. Bu kayıt, ABD&#x27;ye gıda ihracatı için gereklidir.</dd></div></dl>
+        </li>
+        <li class="dcard" data-id="iso22000" data-group="food" style="--tilt: 1.8deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="1" data-w="1413" data-h="1998">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/iso22000-k.webp?v=1" alt="" width="440" height="622" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+            <span class="dcard__body">
+              <span class="dcard__code" translate="no">ISO 22000</span>
+              <span class="dcard__name">Gıda güvenliği yönetim sistemi</span>
+              <span class="dcard__by" translate="no">SigmaCert</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Düzenleyen</dt><dd translate="no">SigmaCert</dd></div><div><dt>Belge no</dt><dd translate="no">MTS-15675</dd></div><div><dt>Tarih</dt><dd translate="no">07.11.2025</dd></div><div><dt>Geçerlilik</dt><dd translate="no">10.11.2026</dd></div><div><dt>Kapsam</dt><dd>Makarna, irmik, erişte, kuskus ve benzeri ürünlerin imalatı.</dd></div></dl>
+        </li>
+        <li class="dcard" data-id="helal" data-group="faith" style="--tilt: -1.8deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="3" data-w="1414" data-h="2000">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/helal-k.webp?v=1" alt="" width="440" height="622" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+            <span class="dcard__body">
+              <span class="dcard__code">Helal</span>
+              <span class="dcard__name">Helal ve Tayyib sertifikası</span>
+              <span class="dcard__by" translate="no">GİMDES</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Düzenleyen</dt><dd translate="no">GİMDES</dd></div><div><dt>Belge no</dt><dd translate="no">430-012-12-26</dd></div><div><dt>Standart</dt><dd translate="no">OIC/SMIIC 1:2019</dd></div><div><dt>Tarih</dt><dd translate="no">17.07.2026</dd></div><div><dt>Geçerlilik</dt><dd translate="no">17.07.2027</dd></div><div><dt>Kapsam</dt><dd>Beşsan&#x27;ın makarna, şehriye ve erişte ürünleri; ürün listesi belgenin eklerindedir.</dd></div></dl>
+        </li>
+        <li class="dcard" data-id="iso9001" data-group="mgmt" style="--tilt: 1.2deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="1" data-w="1452" data-h="1998">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/iso9001-k.webp?v=1" alt="" width="440" height="605" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+            <span class="dcard__body">
+              <span class="dcard__code" translate="no">ISO 9001</span>
+              <span class="dcard__name">Kalite yönetim sistemi</span>
+              <span class="dcard__by" translate="no">Netsert</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Düzenleyen</dt><dd translate="no">Netsert</dd></div><div><dt>Belge no</dt><dd translate="no">NS.KS.168/2024</dd></div><div><dt>Tarih</dt><dd translate="no">19.11.2025</dd></div><div><dt>Geçerlilik</dt><dd translate="no">26.12.2026</dd></div><div><dt>Kapsam</dt><dd>Makarna, irmik, erişte, kuskus ve benzeri ürünlerin imalatı; bunlara ilişkin dış ticaret, lojistik ve yönetim faaliyetleri.</dd></div></dl>
+        </li>
+        <li class="dcard" data-id="iso14001" data-group="mgmt" style="--tilt: -1.4deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="1" data-w="1421" data-h="2005">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/iso14001-k.webp?v=1" alt="" width="440" height="621" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+            <span class="dcard__body">
+              <span class="dcard__code" translate="no">ISO 14001</span>
+              <span class="dcard__name">Çevre yönetim sistemi</span>
+              <span class="dcard__by" translate="no">SigmaCert</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Düzenleyen</dt><dd translate="no">SigmaCert</dd></div><div><dt>Belge no</dt><dd translate="no">MTS-15674</dd></div><div><dt>Tarih</dt><dd translate="no">07.11.2025</dd></div><div><dt>Geçerlilik</dt><dd translate="no">10.11.2026</dd></div><div><dt>Kapsam</dt><dd>Makarna, irmik, erişte, kuskus ve benzeri ürünlerin imalatı; bunlara ilişkin dış ticaret, lojistik ve yönetim faaliyetleri.</dd></div></dl>
+        </li>
+        <li class="dcard" data-id="iso45001" data-group="mgmt" style="--tilt: 1.6deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="1" data-w="1414" data-h="1999">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/iso45001-k.webp?v=1" alt="" width="440" height="622" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+            <span class="dcard__body">
+              <span class="dcard__code" translate="no">ISO 45001</span>
+              <span class="dcard__name">İş sağlığı ve güvenliği yönetim sistemi</span>
+              <span class="dcard__by" translate="no">UGMCERT</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Düzenleyen</dt><dd translate="no">UGMCERT</dd></div><div><dt>Belge no</dt><dd translate="no">U62076244N</dd></div><div><dt>Tarih</dt><dd translate="no">19.11.2025</dd></div><div><dt>Geçerlilik</dt><dd translate="no">22.11.2026</dd></div><div><dt>Kapsam</dt><dd>Makarna, irmik, erişte, kuskus ve benzeri ürünlerin imalatı; bunlara ilişkin dış ticaret, lojistik ve yönetim faaliyetleri.</dd></div></dl>
+        </li>
+        <li class="dcard" data-id="iso27001" data-group="mgmt" style="--tilt: -1.2deg">
+          <button class="dcard__btn" type="button" aria-haspopup="dialog" data-pages="1" data-w="828" data-h="1170">
+            <span class="dcard__mat">
+              <img class="dcard__sheet" src="./img/belgeler/iso27001-k.webp?v=1" alt="" width="440" height="622" loading="lazy" decoding="async">
+              <span class="dcard__open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+            </span>
+            <span class="dcard__body">
+              <span class="dcard__code" translate="no">ISO/IEC 27001</span>
+              <span class="dcard__name">Bilgi güvenliği yönetim sistemi</span>
+              <span class="dcard__by" translate="no">DigiCert</span>
+            </span>
+          </button>
+          <dl class="dcard__facts" hidden><div><dt>Düzenleyen</dt><dd translate="no">DigiCert</dd></div><div><dt>Belge no</dt><dd translate="no">881.564.400</dd></div><div><dt>Tarih</dt><dd translate="no">19.11.2025</dd></div><div><dt>Geçerlilik</dt><dd translate="no">01.12.2026</dd></div><div><dt>Kapsam</dt><dd>Şirketin bilgi güvenliği yönetim sistemi.</dd></div></dl>
+        </li>
+    </ul>
   </section>
 
   <!-- ===== The koala ==================================================== -->
@@ -411,19 +533,40 @@
   <p class="foot__base"><span class="foot__rights"><span>© 2026 Kıtlax Makarna Cipsi</span><span>Tüm hakları saklıdır.</span></span><span class="foot__credit"><span>Web Tasarım</span><a href="https://www.dolphinajans.com/" target="_blank" rel="noopener" dir="ltr">Dolphin Ajans®</a></span></p>
 </footer>
 
-<!-- a document, whole: opened from its card in the quality panel -->
-<dialog class="doc" id="belge" aria-labelledby="belge-title">
-  <div class="doc__card">
-    <div class="doc__head">
-      <div><p class="doc__title" id="belge-title"></p><p class="doc__by" lang="en"></p></div>
-      <button class="doc__close" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    </div>
-    <img class="doc__img" alt="" decoding="async">
+<!-- one paper, whole: lifted off its card; the others an arrow, a key or a swipe away -->
+<dialog class="dv" id="belge" aria-labelledby="dv-title">
+  <div class="dv__stage">
+    <div class="dv__wrap"><img class="dv__sheet" alt="" decoding="async"></div>
+    <button class="dv__nav dv__nav--prev" type="button" aria-label="Önceki belge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="dv__nav dv__nav--next" type="button" aria-label="Sonraki belge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <p class="dv__hint" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.2 15.2 20 20M10.5 7.9v5.2M7.9 10.5h5.2"/></svg><span class="dv__hint-in">Büyütmek için belgeye dokunun</span><span class="dv__hint-out">Küçültmek için dokunun</span></p>
   </div>
+  <aside class="dv__panel">
+    <div class="dv__top">
+      <p class="dv__count" translate="no" dir="ltr"><b>1</b> / <span>9</span></p>
+      <button class="dv__close" type="button" aria-label="Kapat" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="dv__body">
+      <p class="dv__code"></p>
+      <h3 class="dv__title" id="dv-title"></h3>
+      <p class="dv__by" translate="no"></p>
+      <p class="dv__badge" hidden></p>
+      <dl class="dv__facts"></dl>
+      <div class="dv__pages" hidden>
+        <p class="label">Sayfalar</p>
+        <div class="dv__pagebtns"></div>
+      </div>
+    </div>
+    <div class="dv__foot">
+      <a class="dv__open" href="#" target="_blank" rel="noopener"><span>Tam boyutta aç</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
+    </div>
+  </aside>
+  <p class="dv__live" aria-live="polite"></p>
 </dialog>
 
-<script src="./js/i18n.js?v=11"></script>
-<script src="./js/home.js?v=5" defer></script>
+<script src="./js/i18n.js?v=12"></script>
+<script src="./js/home.js?v=6" defer></script>
+<script src="./js/docs.js?v=2" defer></script>
 <script src="./js/scroll.js?v=4" defer></script>
 <script src="./js/trade.js?v=4" defer></script>
 <script src="./js/flavours.js?v=3" defer></script>
