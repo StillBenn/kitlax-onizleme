@@ -315,10 +315,10 @@ section:not(.film) { position: relative; z-index: 1; padding: clamp(4.5rem, 3rem
 .maker { padding-bottom: clamp(3.5rem, 2.5rem + 4vw, 6rem); }
 .docs { padding-top: 0; overflow-anchor: none; }   /* sorting changes the wall's height: the page must not jump to keep a card in place */
 .docs__head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.2rem clamp(2rem, 1rem + 4vw, 6rem); align-items: end;
-  margin-bottom: clamp(1.6rem, 1rem + 2vw, 2.6rem); }
+  margin-bottom: clamp(1.2rem, 0.8rem + 1.5vw, 2rem); }
 .docs__intro { display: grid; gap: 1.1rem; }
 @media (max-width: 900px) { .docs__head { grid-template-columns: 1fr; } }
-.docs__bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: clamp(1.2rem, 0.8rem + 1.5vw, 2rem); }
+.docs__bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: clamp(1rem, 0.7rem + 1vw, 1.5rem); }
 .docs__chip { display: inline-flex; align-items: center; gap: 0.6rem; height: 2.6rem; padding: 0 0.55rem 0 1.1rem; border-radius: 999px;
   background: var(--ivory); box-shadow: inset 0 0 0 1px var(--line); font: 600 0.9rem/1 var(--f-body); color: var(--ink-soft);
   transition: background 320ms var(--e-out), color 320ms var(--e-out), box-shadow 320ms var(--e-out), transform 320ms var(--e-out); }
@@ -329,47 +329,53 @@ section:not(.film) { position: relative; z-index: 1; padding: clamp(4.5rem, 3rem
 .docs__chip:active { transform: scale(0.97); }
 .docs__chip[aria-pressed="true"] { background: var(--ink); color: var(--ivory); box-shadow: none; }
 .docs__chip[aria-pressed="true"] b { background: var(--red); color: #fff; }
-.docs__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(0.8rem, 0.5rem + 1vw, 1.4rem); }
-@media (max-width: 1240px) { .docs__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (max-width: 960px) { .docs__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .docs__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; } }
+/* one shelf: all nine papers in a single row on a wide screen; narrower, the same row scrolls under the
+   finger (snapping card by card) instead of stacking into a tall wall. A sorted shelf keeps its card size. */
+.docs__grid { --gut: var(--pad); list-style: none; margin: 0; padding: 0; display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr)); gap: clamp(0.6rem, 0.3rem + 0.6vw, 0.95rem); }
+@media (max-width: 1180px) {
+  .docs__grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 9.6rem; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--gut); margin-inline: calc(-1 * var(--gut)); padding: 0.5rem var(--gut) 1.1rem;
+    scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--gut), #000 calc(100% - var(--gut)), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 var(--gut), #000 calc(100% - var(--gut)), transparent 100%); }
+  .docs__grid::-webkit-scrollbar { display: none; }
+  .docs__grid > .dcard { scroll-snap-align: start; }
+}
+@media (max-width: 640px) {
+  .docs__grid { grid-auto-columns: 8.4rem; gap: 0.6rem; }
+  .docs__bar { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(-1 * var(--pad)); padding: 0.1rem var(--pad) 0.3rem; scrollbar-width: none; }
+  .docs__bar::-webkit-scrollbar { display: none; }
+  .docs__chip { flex: none; }
+}
 .dcard { position: relative; }
-.dcard__btn { position: relative; display: grid; align-content: start; width: 100%; height: 100%; padding: 0.55rem; border-radius: 20px; background: var(--ivory);
+.dcard__btn { position: relative; display: grid; align-content: start; width: 100%; height: 100%; padding: 0.4rem; border-radius: 16px; background: var(--ivory);
   text-align: start; box-shadow: inset 0 0 0 1px rgba(29, 20, 14, 0.07), 0 1px 2px rgba(29, 20, 14, 0.04);
   transition: transform 650ms var(--e-out), box-shadow 650ms var(--e-out); -webkit-tap-highlight-color: transparent; }
-.dcard__btn:hover { transform: translateY(-5px); box-shadow: inset 0 0 0 1px rgba(29, 20, 14, 0.06), 0 30px 44px -28px rgba(70, 35, 10, 0.5); }
+.dcard__btn:hover { transform: translateY(-5px); box-shadow: inset 0 0 0 1px rgba(29, 20, 14, 0.06), 0 26px 38px -24px rgba(70, 35, 10, 0.5); }
 .dcard__btn:active { transform: translateY(-2px) scale(0.985); transition-duration: 160ms; }
-.dcard__btn:focus-visible { outline-offset: 3px; border-radius: 20px; }
-.dcard__mat { position: relative; display: block; aspect-ratio: 5 / 6; border-radius: 14px; overflow: hidden;
+.dcard__btn:focus-visible { outline-offset: 3px; border-radius: 16px; }
+.dcard__mat { position: relative; display: block; aspect-ratio: 5 / 6; border-radius: 12px; overflow: hidden;
   background: radial-gradient(120% 90% at 50% 32%, #fbf5ec 0%, var(--cream-2) 100%); box-shadow: inset 0 0 0 1px rgba(29, 20, 14, 0.06); }
 /* the sheet fits its mat whatever its shape: centred, a percentage of the mat each way */
-.dcard__sheet { position: absolute; inset: 0; margin: auto; max-width: 76%; max-height: 80%; width: auto; height: auto; border-radius: 2px; background: #fff;
-  transform: rotate(var(--tilt, 0deg)); box-shadow: 0 1px 2px rgba(29, 20, 14, 0.22), 0 16px 26px -14px rgba(29, 20, 14, 0.5);
+.dcard__sheet { position: absolute; inset: 0; margin: auto; max-width: 78%; max-height: 80%; width: auto; height: auto; border-radius: 2px; background: #fff;
+  transform: rotate(var(--tilt, 0deg)); box-shadow: 0 1px 2px rgba(29, 20, 14, 0.22), 0 12px 20px -12px rgba(29, 20, 14, 0.5);
   transition: transform 700ms var(--e-out), box-shadow 700ms var(--e-out); }
-.dcard--wide .dcard__sheet { max-width: 86%; }
-.dcard__btn:hover .dcard__sheet, .dcard__btn:focus-visible .dcard__sheet { transform: translateY(-3%) scale(1.05);
-  box-shadow: 0 1px 2px rgba(29, 20, 14, 0.18), 0 28px 34px -16px rgba(29, 20, 14, 0.55); }
+.dcard--wide .dcard__sheet { max-width: 88%; }
+.dcard__btn:hover .dcard__sheet, .dcard__btn:focus-visible .dcard__sheet { transform: translateY(-3%) scale(1.06);
+  box-shadow: 0 1px 2px rgba(29, 20, 14, 0.18), 0 22px 28px -14px rgba(29, 20, 14, 0.55); }
 .dcard.is-out .dcard__sheet { visibility: hidden; }          /* its sheet is in the viewer */
-.dcard__open { position: absolute; inset-inline-end: 0.6rem; bottom: 0.6rem; display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%;
+.dcard__open { position: absolute; inset-inline-end: 0.45rem; bottom: 0.45rem; display: grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%;
   background: var(--ink); color: var(--ivory); box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.6);
   opacity: 0; transform: translateY(6px) scale(0.86); transition: opacity 320ms var(--e-out), transform 500ms var(--e-out); }
-.dcard__open svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.dcard__open svg { width: 0.85rem; height: 0.85rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .dcard__btn:hover .dcard__open, .dcard__btn:focus-visible .dcard__open { opacity: 1; transform: none; }
-@media (hover: none) { .dcard__open { opacity: 0.9; transform: none; width: 1.9rem; height: 1.9rem; } }
-.dcard__badge { position: absolute; top: 1.05rem; inset-inline-start: 1.05rem; z-index: 1; padding: 0.4rem 0.65rem; border-radius: 999px; background: var(--red); color: #fff;
-  font: 700 0.68rem/1 var(--f-body); letter-spacing: 0.03em; box-shadow: 0 8px 16px -10px rgba(227, 38, 44, 0.9); }
-.dcard__body { display: grid; gap: 0.28rem; padding: 0.95rem 0.55rem 0.5rem; }
-.dcard__code { font: 800 1.2rem/1.1 var(--f-display); letter-spacing: -0.015em; }
-.dcard__name { font-size: 0.88rem; line-height: 1.42; color: var(--ink-soft); }
-.dcard__by { margin-top: 0.3rem; font: 600 0.64rem/1.35 var(--f-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
-@media (max-width: 640px) {
-  .dcard__btn { padding: 0.4rem; border-radius: 16px; }
-  .dcard__mat { border-radius: 12px; }
-  .dcard__badge { top: 0.75rem; inset-inline-start: 0.75rem; padding: 0.34rem 0.55rem; font-size: 0.62rem; }
-  .dcard__body { padding: 0.75rem 0.4rem 0.35rem; }
-  .dcard__code { font-size: 1.05rem; }
-  .dcard__name { font-size: 0.8rem; }
-}
+@media (hover: none) { .dcard__open { opacity: 0.9; transform: none; width: 1.6rem; height: 1.6rem; } }
+.dcard__badge { position: absolute; top: 0.7rem; inset-inline-start: 0.7rem; z-index: 1; padding: 0.3rem 0.5rem; border-radius: 999px; background: var(--red); color: #fff;
+  font: 700 0.6rem/1 var(--f-body); letter-spacing: 0.02em; white-space: nowrap; box-shadow: 0 8px 16px -10px rgba(227, 38, 44, 0.9); }
+.dcard__body { display: grid; gap: 0.2rem; padding: 0.7rem 0.35rem 0.35rem; }
+.dcard__code { font: 800 1rem/1.1 var(--f-display); letter-spacing: -0.015em; }
+.dcard__name { font-size: 0.76rem; line-height: 1.38; color: var(--ink-soft); }
+.dcard__by { display: none; }                                 /* who issued it is in the viewer, with the rest of the facts */
 
 /* ---- the viewer: one paper, whole --------------------------------------------------
    The page dims and blurs; the sheet flies in from its card and straightens; the facts slide
