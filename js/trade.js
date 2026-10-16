@@ -27,9 +27,11 @@
   form.querySelectorAll("[data-sum]").forEach(function (el) { sums[el.getAttribute("data-sum")] = el; });
 
   var n = function (el) { var v = parseInt(el.value, 10); return isFinite(v) && v > 0 ? Math.min(v, 9999) : 0; };
+  /* the reader's own numbers: 1.234,56 in Turkish, 1,234.56 in English, Arabic and (Latin American) Spanish */
+  var LOCALE = { tr: "tr-TR", es: "es-419" };
   var num = function (v, dec) {
     var lang = window.KX ? window.KX.lang() : "tr";
-    return v.toLocaleString(lang === "tr" ? "tr-TR" : "en-GB", { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+    return v.toLocaleString(LOCALE[lang] || "en-GB", { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
   };
   function total() {
     var koli = inputs.reduce(function (s, el) { return s + n(el); }, 0);

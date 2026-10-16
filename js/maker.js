@@ -16,7 +16,7 @@
   var fine = matchMedia("(pointer: fine)").matches;
 
   /* ---- figures, counted in ---- */
-  /* thousands grouped the reader's way: 37.960 in Turkish, 37,960 in English and Arabic */
+  /* thousands grouped the reader's way: 37.960 in Turkish, 37,960 in English, Arabic and (Latin American) Spanish */
   function fmtOf(el) {
     var group = el.hasAttribute("data-sep");
     return function (v) {

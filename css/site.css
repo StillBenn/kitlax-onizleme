@@ -115,6 +115,8 @@ html.has-sound .sound__bars i:nth-child(4) { animation-delay: -0.2s; }
 @media (prefers-reduced-motion: reduce) { html.has-sound .sound__bars i { animation: none; height: 8px; } }
 @media (max-width: 820px) { .hdr__nav [data-optional] { display: none; } }
 @media (max-width: 520px) { .hdr__cta { display: none; } }
+/* a phone: the logo, the menu and four language buttons share one row — the buttons and the gaps tighten */
+@media (max-width: 520px) { .hdr { gap: 0.9rem; } .hdr__nav { gap: 0.7rem; } .lang__btn { min-width: 1.9rem; letter-spacing: 0.04em; } }
 
 /* ---- the film ------------------------------------------------------------------ */
 /* The film's own box takes no pointer: its last screen overlaps the flavours section (below), and that
