@@ -52,9 +52,11 @@
   var img = document.querySelector(".koala__img"), cv = document.querySelector(".koala__paint");
   var stage = document.querySelector(".koala__stage");
   var dress = [].slice.call(document.querySelectorAll("[data-dress]"));
-  /* the artwork wears ketçap red; each other flavour's colour as hue and saturation (the bags' own,
-     a little livelier: dyed cloth, not ink) */
-  var DYE = { ketcap: null, peynir: [112, 0.42], sut: [182, 0.58], tako: [214, 0.62] };
+  /* the artwork wears ketçap red; each other flavour's colour as hue and saturation (the colour of
+     its bag's flavour band, a little livelier: dyed cloth, not ink) */
+  var DYE = { ketcap: null, peynir: [42, 0.88, 0.42], sut: [182, 0.58], tako: [126, 0.56] };
+  /* the third number lifts the cloth's lightness (the red's own reads olive once it is yellow; the
+     shadows and the highlights keep their place: the lift is largest in the mid-tones) */
   var mask = null, base = null;
   function prepare() {
     if (mask || !img.naturalWidth) return !!mask;
@@ -86,7 +88,7 @@
       if (!m) { o[i + 3] = 0; continue; }
       var r = s[i] / 255, g = s[i + 1] / 255, b = s[i + 2] / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2;
       var sat = mx === mn ? 0 : (l > 0.5 ? (mx - mn) / (2 - mx - mn) : (mx - mn) / (mx + mn));
-      var rgb = hsl(target[0] / 360, Math.min(sat, target[1]), l);
+      var rgb = hsl(target[0] / 360, Math.min(sat, target[1]), Math.min(1, l + (target[2] || 0) * 2 * l * (1 - l)));
       o[i] = rgb[0]; o[i + 1] = rgb[1]; o[i + 2] = rgb[2]; o[i + 3] = Math.round(s[i + 3] * m);
     }
     cx.putImageData(out, 0, 0);
